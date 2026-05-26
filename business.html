@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Businesses — Goyal Group</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-dim: rgba(201,168,76,0.15);
+    --navy: #0D1B2A;
+    --navy-mid: #142233;
+    --white: #FFFFFF;
+    --grey-bg: #F5F6F8;
+    --grey-text: #6B7280;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--grey-bg); color: var(--navy); overflow-x: hidden; }
+
+  /* ── NAVBAR ── */
+  .navbar-wrapper { position: fixed; top: 16px; left: 50%; transform: translateX(-50%); width: calc(100% - 48px); max-width: 1240px; z-index: 200; transition: top 0.3s; }
+  .navbar { background: var(--white); border-radius: 50px; padding: 12px 22px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 4px 32px rgba(13,27,42,0.12); }
+  .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+  .logo-hex { width: 42px; height: 42px; }
+  .logo-text .goyal { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.1rem; color: var(--navy); letter-spacing: 0.08em; display: block; }
+  .logo-text .group { font-family: 'Sora', sans-serif; font-weight: 600; font-size: 0.58rem; color: var(--gold); letter-spacing: 0.22em; text-transform: uppercase; display: block; margin-top: 1px; }
+  .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+  .nav-links a { font-size: 0.8rem; font-weight: 500; color: #374151; text-decoration: none; padding: 6px 10px; border-radius: 20px; transition: color 0.2s; white-space: nowrap; }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-links .active { color: var(--navy); font-weight: 700; position: relative; }
+  .nav-links .active::after { content: ''; position: absolute; bottom: 2px; left: 10px; right: 10px; height: 2px; background: var(--gold); border-radius: 2px; }
+  .nav-cta { background: var(--navy); color: var(--white) !important; padding: 10px 20px !important; border-radius: 50px !important; font-weight: 700 !important; font-size: 0.8rem !important; display: flex; align-items: center; gap: 6px; flex-shrink: 0; transition: background 0.2s, transform 0.2s; text-decoration: none; }
+  .nav-cta:hover { background: #1a2f47; transform: translateY(-1px); }
+
+  /* ── PAGE HERO ── */
+  .page-hero { background: var(--navy); padding: 130px 24px 80px; position: relative; overflow: hidden; }
+  .page-hero::before { content: ''; position: absolute; top: -100px; right: -100px; width: 500px; height: 500px; border-radius: 50%; border: 80px solid rgba(201,168,76,0.06); pointer-events: none; }
+  .page-hero::after { content: ''; position: absolute; bottom: -60px; left: 10%; width: 300px; height: 300px; border-radius: 50%; border: 50px solid rgba(201,168,76,0.04); pointer-events: none; }
+  /* gold grid lines */
+  .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; }
+  .page-hero-inner { max-width: 1240px; margin: 0 auto; position: relative; z-index: 1; }
+  .breadcrumb { display: flex; align-items: center; gap: 8px; margin-bottom: 24px; }
+  .breadcrumb a { font-size: 0.78rem; color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--gold); }
+  .breadcrumb-sep { color: rgba(255,255,255,0.25); font-size: 0.75rem; }
+  .breadcrumb span { font-size: 0.78rem; color: var(--gold); font-weight: 600; }
+  .page-hero-tag { display: inline-flex; align-items: center; gap: 8px; background: var(--gold-dim); border: 1px solid rgba(201,168,76,0.3); border-radius: 50px; padding: 6px 14px; font-size: 0.75rem; font-weight: 600; color: var(--gold); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 20px; }
+  .page-hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+  .page-hero-heading { font-family: 'Sora', sans-serif; font-weight: 800; font-size: clamp(2.4rem, 5vw, 3.8rem); color: var(--white); line-height: 1.08; margin-bottom: 20px; max-width: 700px; }
+  .page-hero-heading span { color: var(--gold); }
+  .page-hero-body { font-size: 1rem; line-height: 1.75; color: rgba(255,255,255,0.6); max-width: 560px; margin-bottom: 40px; }
+  .hero-stats-row { display: flex; gap: 36px; flex-wrap: wrap; }
+  .hero-stat { }
+  .hero-stat-num { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.9rem; color: var(--white); line-height: 1; }
+  .hero-stat-num span { color: var(--gold); }
+  .hero-stat-label { font-size: 0.75rem; color: rgba(255,255,255,0.45); margin-top: 4px; }
+
+  /* ── SECTOR FILTER TABS ── */
+  .filter-wrap { background: var(--white); border-bottom: 1px solid #E9ECF0; position: sticky; top: 68px; z-index: 100; box-shadow: 0 2px 16px rgba(13,27,42,0.06); }
+  .filter-inner { max-width: 1240px; margin: 0 auto; padding: 0 24px; display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+  .filter-inner::-webkit-scrollbar { display: none; }
+  .filter-btn { font-family: 'Sora', sans-serif; font-size: 0.82rem; font-weight: 600; color: var(--grey-text); background: none; border: none; cursor: pointer; padding: 18px 16px; white-space: nowrap; border-bottom: 2.5px solid transparent; transition: color 0.2s, border-color 0.2s; display: flex; align-items: center; gap: 7px; }
+  .filter-btn:hover { color: var(--navy); }
+  .filter-btn.active { color: var(--navy); border-bottom-color: var(--gold); }
+  .filter-dot { width: 7px; height: 7px; border-radius: 50%; }
+
+  /* ── BUSINESS SECTIONS ── */
+  .biz-section { padding: 88px 24px; }
+  .biz-section:nth-child(odd) { background: var(--grey-bg); }
+  .biz-section:nth-child(even) { background: var(--white); }
+  .biz-section-inner { max-width: 1240px; margin: 0 auto; }
+
+  /* Full-width feature layout alternates L/R */
+  .biz-feature { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+  .biz-feature.reverse { direction: rtl; }
+  .biz-feature.reverse > * { direction: ltr; }
+
+  .biz-visual { position: relative; }
+  .biz-visual-card { border-radius: 24px; overflow: hidden; position: relative; }
+  .biz-visual-bg { width: 100%; aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; border-radius: 24px; position: relative; overflow: hidden; }
+  .biz-visual-accent { position: absolute; width: 120px; height: 120px; border-radius: 50%; filter: blur(50px); opacity: 0.35; }
+  .biz-visual-accent.tl { top: -20px; left: -20px; }
+  .biz-visual-accent.br { bottom: -20px; right: -20px; }
+  .biz-icon-large { position: relative; z-index: 1; }
+
+  /* floating stat pill on visual */
+  .biz-visual-pill { position: absolute; background: var(--white); border-radius: 14px; padding: 14px 18px; box-shadow: 0 8px 32px rgba(13,27,42,0.14); display: flex; align-items: center; gap: 12px; z-index: 2; }
+  .biz-visual-pill.bottom-left { bottom: -20px; left: -20px; }
+  .biz-visual-pill.top-right { top: -20px; right: -20px; }
+  .biz-pill-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .biz-pill-num { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.05rem; color: var(--navy); line-height: 1; }
+  .biz-pill-label { font-size: 0.7rem; color: var(--grey-text); margin-top: 2px; }
+
+  /* text side */
+  .biz-sector-tag { display: inline-flex; align-items: center; gap: 8px; border-radius: 50px; padding: 5px 14px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px; }
+  .biz-sector-num { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 4rem; color: rgba(13,27,42,0.06); line-height: 1; margin-bottom: -16px; letter-spacing: -0.04em; }
+  .biz-title { font-family: 'Sora', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 3vw, 2.6rem); color: var(--navy); line-height: 1.1; margin-bottom: 16px; }
+  .biz-title span { color: var(--gold); }
+  .biz-desc { font-size: 0.96rem; line-height: 1.8; color: var(--grey-text); margin-bottom: 28px; }
+  .biz-products { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+  .biz-product-tag { background: var(--grey-bg); border: 1px solid #E3E6EA; border-radius: 50px; padding: 6px 14px; font-size: 0.75rem; font-weight: 600; color: var(--navy); transition: background 0.2s, border-color 0.2s; cursor: default; }
+  .biz-product-tag:hover { background: var(--gold-dim); border-color: rgba(201,168,76,0.4); }
+  .biz-metrics { display: flex; gap: 28px; margin-bottom: 32px; }
+  .biz-metric { }
+  .biz-metric-num { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.55rem; color: var(--navy); line-height: 1; }
+  .biz-metric-label { font-size: 0.72rem; color: var(--grey-text); margin-top: 4px; }
+  .biz-cta { display: inline-flex; align-items: center; gap: 8px; background: var(--navy); color: var(--white); padding: 12px 24px; border-radius: 50px; font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.85rem; text-decoration: none; transition: background 0.2s, transform 0.2s; }
+  .biz-cta:hover { background: var(--gold); color: var(--navy); transform: translateY(-2px); }
+
+  /* ── PRODUCT GRID (for construction) ── */
+  .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 56px; }
+  .product-card { background: var(--white); border: 1px solid #E9ECF0; border-radius: 16px; padding: 22px; transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s; cursor: default; }
+  .product-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(13,27,42,0.1); border-color: rgba(201,168,76,0.35); }
+  .product-card-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--gold-dim); border: 1px solid rgba(201,168,76,0.25); display: flex; align-items: center; justify-content: center; color: var(--gold); margin-bottom: 14px; }
+  .product-card-name { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.9rem; color: var(--navy); margin-bottom: 6px; }
+  .product-card-desc { font-size: 0.78rem; color: var(--grey-text); line-height: 1.55; }
+
+  /* ── MARQUEE STRIP ── */
+  .marquee-section { background: var(--gold); padding: 16px 0; overflow: hidden; }
+  .marquee-track { display: flex; gap: 0; animation: marquee 22s linear infinite; white-space: nowrap; }
+  .marquee-item { padding: 0 40px; font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.88rem; color: var(--navy); display: flex; align-items: center; gap: 16px; }
+  .marquee-dot { width: 5px; height: 5px; background: var(--navy); border-radius: 50%; opacity: 0.4; }
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ── CTA BANNER ── */
+  .cta-banner { background: var(--navy); padding: 90px 24px; position: relative; overflow: hidden; }
+  .cta-banner::before { content: ''; position: absolute; top: -80px; right: -80px; width: 360px; height: 360px; border-radius: 50%; border: 70px solid rgba(201,168,76,0.07); pointer-events: none; }
+  .cta-banner-inner { max-width: 860px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
+  .cta-heading { font-family: 'Sora', sans-serif; font-weight: 800; font-size: clamp(2rem, 4vw, 3rem); color: var(--white); line-height: 1.1; margin-bottom: 16px; }
+  .cta-heading span { color: var(--gold); }
+  .cta-body { font-size: 1rem; color: rgba(255,255,255,0.58); line-height: 1.7; margin-bottom: 36px; }
+  .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .cta-btn-gold { display: inline-flex; align-items: center; gap: 8px; background: var(--gold); color: var(--navy); padding: 14px 30px; border-radius: 50px; font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.9rem; text-decoration: none; transition: background 0.2s, transform 0.2s; }
+  .cta-btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .cta-btn-ghost { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--white); padding: 14px 30px; border-radius: 50px; border: 1.5px solid rgba(255,255,255,0.22); font-family: 'Sora', sans-serif; font-weight: 600; font-size: 0.9rem; text-decoration: none; transition: border-color 0.2s, color 0.2s, transform 0.2s; }
+  .cta-btn-ghost:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+  /* ── FOOTER ── */
+  .footer { background: #060d15; padding: 36px 24px 24px; }
+  .footer-inner { max-width: 1240px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
+  .footer-copy { font-size: 0.77rem; color: rgba(255,255,255,0.3); }
+  .footer-links { display: flex; gap: 22px; }
+  .footer-links a { font-size: 0.77rem; color: rgba(255,255,255,0.38); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--gold); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 960px) {
+    .nav-links { display: none; }
+    .biz-feature { grid-template-columns: 1fr; gap: 40px; }
+    .biz-feature.reverse { direction: ltr; }
+    .product-grid { grid-template-columns: 1fr 1fr; }
+    .hero-stats-row { gap: 24px; }
+  }
+  @media (max-width: 600px) {
+    .product-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<div class="navbar-wrapper">
+  <nav class="navbar">
+    <a href="goyal-group-homepage.html" class="logo">
+      <svg class="logo-hex" viewBox="0 0 44 44" fill="none">
+        <polygon points="22,6 36.5,14 36.5,30 22,38 7.5,30 7.5,14" fill="url(#hg)"/>
+        <defs><linearGradient id="hg" x1="7.5" y1="6" x2="36.5" y2="38" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#E8C97A"/><stop offset="100%" stop-color="#B8872C"/></linearGradient></defs>
+        <text x="22" y="27" text-anchor="middle" font-family="Sora,sans-serif" font-weight="800" font-size="15" fill="#0D1B2A">G</text>
+      </svg>
+      <div class="logo-text"><span class="goyal">GOYAL</span><span class="group">GROUP</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="business.html" class="active">Our Businesses</a></li>
+      <li><a href="sustainabality.html">Sustainability</a></li>
+      <li><a href="i">Investors</a></li>
+      <li><a href="">Careers</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+    <a href="contact.html" class="nav-cta">Get In Touch ↗</a>
+  </nav>
+</div>
+
+<!-- ── PAGE HERO ── -->
+<section class="page-hero">
+  <div class="hero-grid"></div>
+  <div class="page-hero-inner">
+    <div class="breadcrumb">
+      <a href="goyal-group-homepage.html">Home</a>
+      <span class="breadcrumb-sep">›</span>
+      <span>Our Businesses</span>
+    </div>
+    <div class="page-hero-tag">Our Businesses</div>
+    <h1 class="page-hero-heading">Five Sectors.<br>One <span>Unified Vision.</span></h1>
+    <p class="page-hero-body">From supplying the raw materials that raise India's skylines, to distributing automobiles, powering e-commerce, and developing real estate — the Goyal Group operates at the intersection of ambition and execution.</p>
+    <div class="hero-stats-row">
+      <div class="hero-stat"><div class="hero-stat-num">5<span>+</span></div><div class="hero-stat-label">Business Verticals</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">₹750<span>Cr+</span></div><div class="hero-stat-label">Group Turnover</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">200<span>+</span></div><div class="hero-stat-label">Locations Across India</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">25K<span>+</span></div><div class="hero-stat-label">Employees</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FILTER TABS ── -->
+<div class="filter-wrap">
+  <div class="filter-inner">
+    <button class="filter-btn active" onclick="scrollTo('construction')">
+      <span class="filter-dot" style="background:#C9A84C;"></span> Construction B2B
+    </button>
+    <button class="filter-btn" onclick="scrollTo('automotive')">
+      <span class="filter-dot" style="background:#2563EB;"></span> Automotive
+    </button>
+    <button class="filter-btn" onclick="scrollTo('ecommerce')">
+      <span class="filter-dot" style="background:#16A34A;"></span> E-Commerce
+    </button>
+    <button class="filter-btn" onclick="scrollTo('realestate')">
+      <span class="filter-dot" style="background:#9333EA;"></span> Real Estate
+    </button>
+    <button class="filter-btn" onclick="scrollTo('warehousing')">
+      <span class="filter-dot" style="background:#EA580C;"></span> Warehousing
+    </button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     01 — CONSTRUCTION MATERIALS B2B
+════════════════════════════════════════════════ -->
+<section class="biz-section" id="construction">
+  <div class="biz-section-inner">
+    <div class="biz-feature">
+
+      <!-- VISUAL -->
+      <div class="biz-visual">
+        <div class="biz-visual-card">
+          <div class="biz-visual-bg" style="background:linear-gradient(135deg,#1a2f1a 0%,#0D1B2A 100%);min-height:380px;">
+            <div class="biz-visual-accent tl" style="background:#C9A84C;"></div>
+            <div class="biz-visual-accent br" style="background:#C9A84C;"></div>
+            <!-- Isometric warehouse/materials SVG -->
+            <svg class="biz-icon-large" width="280" height="280" viewBox="0 0 280 280" fill="none">
+              <!-- warehouse structure -->
+              <polygon points="140,30 230,78 230,186 140,234 50,186 50,78" fill="none" stroke="rgba(201,168,76,0.2)" stroke-width="1"/>
+              <polygon points="140,30 230,78 140,126 50,78" fill="#C9A84C" opacity="0.18"/>
+              <polygon points="50,78 140,126 140,234 50,186" fill="#C9A84C" opacity="0.1"/>
+              <polygon points="230,78 140,126 140,234 230,186" fill="#C9A84C" opacity="0.14"/>
+              <!-- cement bags stack -->
+              <rect x="70" y="150" width="36" height="22" rx="3" fill="#C9A84C" opacity="0.5"/>
+              <rect x="70" y="128" width="36" height="22" rx="3" fill="#C9A84C" opacity="0.4"/>
+              <rect x="70" y="106" width="36" height="22" rx="3" fill="#C9A84C" opacity="0.3"/>
+              <line x1="78" y1="150" x2="78" y2="172" stroke="rgba(13,27,42,0.3)" stroke-width="1"/>
+              <line x1="88" y1="150" x2="88" y2="172" stroke="rgba(13,27,42,0.3)" stroke-width="1"/>
+              <!-- tiles stack -->
+              <rect x="120" y="160" width="40" height="5" rx="1" fill="#E8C97A" opacity="0.7"/>
+              <rect x="120" y="154" width="40" height="5" rx="1" fill="#D4AA60" opacity="0.6"/>
+              <rect x="120" y="148" width="40" height="5" rx="1" fill="#C9A84C" opacity="0.5"/>
+              <rect x="120" y="142" width="40" height="5" rx="1" fill="#B8872C" opacity="0.45"/>
+              <rect x="120" y="136" width="40" height="5" rx="1" fill="#C9A84C" opacity="0.4"/>
+              <!-- pipe stack -->
+              <ellipse cx="190" cy="135" rx="18" ry="6" fill="#C9A84C" opacity="0.5"/>
+              <ellipse cx="190" cy="142" rx="18" ry="6" fill="#B8872C" opacity="0.4"/>
+              <ellipse cx="190" cy="149" rx="18" ry="6" fill="#9A7020" opacity="0.35"/>
+              <!-- bathroom fittings symbol -->
+              <circle cx="175" cy="170" r="12" fill="none" stroke="#C9A84C" stroke-width="2" opacity="0.5"/>
+              <path d="M167 170 h16 M175 162 v16" stroke="#C9A84C" stroke-width="2" opacity="0.5" stroke-linecap="round"/>
+              <!-- Goyal G badge -->
+              <circle cx="140" cy="78" r="24" fill="rgba(201,168,76,0.12)" stroke="#C9A84C" stroke-width="1.5" opacity="0.6"/>
+              <text x="140" y="85" text-anchor="middle" font-family="Sora,sans-serif" font-weight="800" font-size="22" fill="#C9A84C" opacity="0.9">G</text>
+            </svg>
+          </div>
+        </div>
+        <!-- stat pills -->
+        <div class="biz-visual-pill bottom-left">
+          <div class="biz-pill-icon" style="background:rgba(201,168,76,0.15);">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#C9A84C" stroke-width="1.6" stroke-linecap="round"><rect x="2" y="2" width="14" height="14" rx="2"/><path d="M6 9h6M9 6v6"/></svg>
+          </div>
+          <div><div class="biz-pill-num">500+</div><div class="biz-pill-label">SKUs Stocked</div></div>
+        </div>
+        <div class="biz-visual-pill top-right">
+          <div class="biz-pill-icon" style="background:rgba(201,168,76,0.15);">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#C9A84C" stroke-width="1.6" stroke-linecap="round"><path d="M9 1l2 5h5l-4 3 2 5-5-3-5 3 2-5-4-3h5z"/></svg>
+          </div>
+          <div><div class="biz-pill-num">#1</div><div class="biz-pill-label">B2B Supplier</div></div>
+        </div>
+      </div>
+
+      <!-- TEXT -->
+      <div class="biz-text">
+        <div class="biz-sector-num">01</div>
+        <div class="biz-sector-tag" style="background:rgba(201,168,76,0.12);color:#C9A84C;border:1px solid rgba(201,168,76,0.3);">
+          Construction Materials
+        </div>
+        <h2 class="biz-title">The Backbone of <span>India's Construction</span></h2>
+        <p class="biz-desc">Our flagship vertical — and the foundation on which Goyal Group was built. We are a premier B2B trading partner supplying the complete spectrum of building materials to India's top developers. Trusted by Prestige Group, Brigade Group, Sobha and more, we deliver quality products on time, every time, at scale.</p>
+        <div class="biz-metrics">
+          <div class="biz-metric"><div class="biz-metric-num">₹500Cr+</div><div class="biz-metric-label">Annual Turnover</div></div>
+          <div class="biz-metric"><div class="biz-metric-num">50+</div><div class="biz-metric-label">Major Builder Clients</div></div>
+          <div class="biz-metric"><div class="biz-metric-num">Pan India</div><div class="biz-metric-label">Delivery Network</div></div>
+        </div>
+        <div class="biz-products">
+          <span class="biz-product-tag">Cement</span>
+          <span class="biz-product-tag">Bathroom Fittings</span>
+          <span class="biz-product-tag">Tiles & Flooring</span>
+          <span class="biz-product-tag">CPVC / PVC Pipes</span>
+          <span class="biz-product-tag">Sanitary Ware</span>
+          <span class="biz-product-tag">Adhesives & Grouts</span>
+          <span class="biz-product-tag">Electrical Fittings</span>
+          <span class="biz-product-tag">Steel & TMT Bars</span>
+        </div>
+        <a href="#contact" class="biz-cta">Partner With Us ↗</a>
+      </div>
+    </div>
+
+    <!-- Product Category Grid -->
+    <div class="product-grid">
+      <div class="product-card">
+        <div class="product-card-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="2" y="8" width="18" height="12" rx="2"/><path d="M6 8V6a5 5 0 0110 0v2"/><circle cx="11" cy="14" r="2"/></svg>
+        </div>
+        <div class="product-card-name">Cement & Concrete</div>
+        <div class="product-card-desc">OPC, PPC, White Cement from leading brands like UltraTech, ACC, Ambuja, Birla.</div>
+      </div>
+      <div class="product-card">
+        <div class="product-card-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="12" y="3" width="7" height="7" rx="1"/><rect x="3" y="12" width="7" height="7" rx="1"/><rect x="12" y="12" width="7" height="7" rx="1"/></svg>
+        </div>
+        <div class="product-card-name">Tiles & Flooring</div>
+        <div class="product-card-desc">Vitrified, ceramic, marble-effect and wooden-finish tiles for all floor & wall applications.</div>
+      </div>
+      <div class="product-card">
+        <div class="product-card-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="8" cy="14" r="4"/><path d="M8 10V4M8 4h6a4 4 0 010 8"/></svg>
+        </div>
+        <div class="product-card-name">Bathroom Fittings</div>
+        <div class="product-card-desc">Premium faucets, showers, basins and accessories from Jaquar, Kohler, Grohe and more.</div>
+      </div>
+      <div class="product-card">
+        <div class="product-card-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M11 3v16M4 7h14M4 15h14"/><ellipse cx="11" cy="3" rx="4" ry="1.5"/><ellipse cx="11" cy="19" rx="4" ry="1.5"/></svg>
+        </div>
+        <div class="product-card-name">CPVC / PVC Pipes</div>
+        <div class="product-card-desc">Full range of plumbing pipes, fittings and valves. Astral, Supreme, Prince and more.</div>
+      </div>
+      <div class="product-card">
+        <div class="product-card-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="3" y="9" width="16" height="10" rx="2"/><path d="M7 9V7a4 4 0 018 0v2"/><path d="M11 13v2"/></svg>
+        </div>
+        <div class="product-card-name">Sanitary Ware</div>
+        <div class="product-card-desc">Water closets, wash basins, urinals and complete bathroom suites from top brands.</div>
+      </div>
+      <div class="product-card">
+        <div class="product-card-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M11 2L3 7v13h16V7z"/><path d="M8 22v-9h6v9"/></svg>
+        </div>
+        <div class="product-card-name">Steel & TMT Bars</div>
+        <div class="product-card-desc">Structural steel, TMT reinforcement bars, and MS sections for large-scale construction.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MARQUEE ── -->
+<div class="marquee-section">
+  <div class="marquee-track" id="marqueeTrack">
+    <span class="marquee-item">Prestige Group <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Brigade Group <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Sobha Developers <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Godrej Properties <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Manyata Developers <span class="marquee-dot"></span></span>
+    <span class="marquee-item">UltraTech <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Jaquar <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Astral Pipes <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Prestige Group <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Brigade Group <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Sobha Developers <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Godrej Properties <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Manyata Developers <span class="marquee-dot"></span></span>
+    <span class="marquee-item">UltraTech <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Jaquar <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Astral Pipes <span class="marquee-dot"></span></span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     02 — AUTOMOTIVE DISTRIBUTION
+════════════════════════════════════════════════ -->
+<section class="biz-section" id="automotive">
+  <div class="biz-section-inner">
+    <div class="biz-feature reverse">
+
+      <!-- VISUAL -->
+      <div class="biz-visual">
+        <div class="biz-visual-card">
+          <div class="biz-visual-bg" style="background:linear-gradient(135deg,#0a1825 0%,#162540 100%);min-height:380px;">
+            <div class="biz-visual-accent tl" style="background:#2563EB;"></div>
+            <div class="biz-visual-accent br" style="background:#1E40AF;"></div>
+            <svg class="biz-icon-large" width="280" height="260" viewBox="0 0 280 260" fill="none">
+              <!-- road -->
+              <rect x="20" y="190" width="240" height="30" rx="4" fill="rgba(255,255,255,0.04)"/>
+              <line x1="140" y1="195" x2="140" y2="215" stroke="rgba(255,255,255,0.15)" stroke-width="3" stroke-dasharray="8 6"/>
+              <!-- car body -->
+              <path d="M55 170 Q70 140 95 136 L185 136 Q210 140 225 170 L225 195 L55 195 Z" fill="rgba(37,99,235,0.25)" stroke="#2563EB" stroke-width="1.5"/>
+              <!-- windshields -->
+              <path d="M100 136 Q112 118 135 118 L155 118 Q168 118 180 136 Z" fill="rgba(37,99,235,0.4)" stroke="#3B82F6" stroke-width="1"/>
+              <!-- headlights -->
+              <rect x="55" y="172" width="18" height="10" rx="2" fill="#FBBF24" opacity="0.8"/>
+              <rect x="207" y="172" width="18" height="10" rx="2" fill="#FBBF24" opacity="0.8"/>
+              <!-- tail lights glow -->
+              <ellipse cx="73" cy="182" rx="12" ry="5" fill="#FBBF24" opacity="0.18" filter="url(#glow)"/>
+              <defs><filter id="glow"><feGaussianBlur stdDeviation="4" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+              <!-- wheels -->
+              <circle cx="93" cy="198" r="20" fill="#0a1825" stroke="#2563EB" stroke-width="2"/>
+              <circle cx="93" cy="198" r="11" fill="#162540" stroke="#3B82F6" stroke-width="1.5"/>
+              <circle cx="93" cy="198" r="4" fill="#2563EB"/>
+              <circle cx="187" cy="198" r="20" fill="#0a1825" stroke="#2563EB" stroke-width="2"/>
+              <circle cx="187" cy="198" r="11" fill="#162540" stroke="#3B82F6" stroke-width="1.5"/>
+              <circle cx="187" cy="198" r="4" fill="#2563EB"/>
+              <!-- door line -->
+              <path d="M140 136 L140 195" stroke="#3B82F6" stroke-width="1" opacity="0.4"/>
+              <!-- showroom building bg -->
+              <rect x="50" y="50" width="180" height="80" rx="4" fill="rgba(37,99,235,0.06)" stroke="rgba(37,99,235,0.2)" stroke-width="1"/>
+              <rect x="62" y="62" width="30" height="40" rx="2" fill="rgba(37,99,235,0.12)" stroke="rgba(37,99,235,0.2)" stroke-width="0.8"/>
+              <rect x="100" y="62" width="30" height="40" rx="2" fill="rgba(37,99,235,0.12)" stroke="rgba(37,99,235,0.2)" stroke-width="0.8"/>
+              <rect x="138" y="62" width="30" height="40" rx="2" fill="rgba(37,99,235,0.12)" stroke="rgba(37,99,235,0.2)" stroke-width="0.8"/>
+              <rect x="176" y="62" width="42" height="40" rx="2" fill="rgba(37,99,235,0.08)" stroke="rgba(37,99,235,0.15)" stroke-width="0.8"/>
+              <text x="140" y="105" text-anchor="middle" font-family="Sora,sans-serif" font-weight="700" font-size="8" fill="rgba(59,130,246,0.6)" letter-spacing="2">GOYAL AUTO</text>
+            </svg>
+          </div>
+        </div>
+        <div class="biz-visual-pill bottom-left">
+          <div class="biz-pill-icon" style="background:#EFF6FF;">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#2563EB" stroke-width="1.6" stroke-linecap="round"><circle cx="5" cy="14" r="2"/><circle cx="13" cy="14" r="2"/><path d="M3 14H1V9l3-5h8l3 5v5h-2"/><path d="M7 4v5"/></svg>
+          </div>
+          <div><div class="biz-pill-num" style="color:#2563EB;">1000+</div><div class="biz-pill-label">Vehicles Delivered</div></div>
+        </div>
+        <div class="biz-visual-pill top-right">
+          <div class="biz-pill-icon" style="background:#EFF6FF;">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#2563EB" stroke-width="1.6"><path d="M9 1l2 5h5l-4 3 2 5-5-3-5 3 2-5-4-3h5z"/></svg>
+          </div>
+          <div><div class="biz-pill-num" style="color:#2563EB;">Authorized</div><div class="biz-pill-label">Dealer Partner</div></div>
+        </div>
+      </div>
+
+      <!-- TEXT -->
+      <div class="biz-text">
+        <div class="biz-sector-num">02</div>
+        <div class="biz-sector-tag" style="background:#EFF6FF;color:#2563EB;border:1px solid #BFDBFE;">
+          Automotive Distribution
+        </div>
+        <h2 class="biz-title">Driving <span style="color:#2563EB;">Growth</span> Across India</h2>
+        <p class="biz-desc">Goyal Group has established a strong presence in India's booming automotive sector through authorised dealership partnerships and vehicle distribution networks. We connect leading automobile manufacturers with retail customers and fleet operators, ensuring seamless delivery across key markets.</p>
+        <div class="biz-metrics">
+          <div class="biz-metric"><div class="biz-metric-num">1000+</div><div class="biz-metric-label">Units Annually</div></div>
+          <div class="biz-metric"><div class="biz-metric-num">Multi-Brand</div><div class="biz-metric-label">Distribution</div></div>
+          <div class="biz-metric"><div class="biz-metric-num">B2B & B2C</div><div class="biz-metric-label">Sales Channels</div></div>
+        </div>
+        <div class="biz-products">
+          <span class="biz-product-tag">Passenger Vehicles</span>
+          <span class="biz-product-tag">Commercial Vehicles</span>
+          <span class="biz-product-tag">Fleet Sales</span>
+          <span class="biz-product-tag">After-Sales Service</span>
+          <span class="biz-product-tag">Auto Financing</span>
+          <span class="biz-product-tag">Insurance</span>
+        </div>
+        <a href="#contact" class="biz-cta" style="background:#2563EB;">Explore Automotive ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     03 — E-COMMERCE
+════════════════════════════════════════════════ -->
+<section class="biz-section" id="ecommerce">
+  <div class="biz-section-inner">
+    <div class="biz-feature">
+
+      <!-- VISUAL -->
+      <div class="biz-visual">
+        <div class="biz-visual-card">
+          <div class="biz-visual-bg" style="background:linear-gradient(135deg,#052e16 0%,#0D1B2A 100%);min-height:380px;">
+            <div class="biz-visual-accent tl" style="background:#16A34A;"></div>
+            <div class="biz-visual-accent br" style="background:#15803D;"></div>
+            <svg class="biz-icon-large" width="280" height="260" viewBox="0 0 280 260" fill="none">
+              <!-- phone screen -->
+              <rect x="95" y="30" width="90" height="160" rx="14" fill="rgba(22,163,74,0.12)" stroke="#16A34A" stroke-width="1.5"/>
+              <rect x="102" y="48" width="76" height="104" rx="4" fill="rgba(22,163,74,0.08)"/>
+              <!-- app UI -->
+              <rect x="108" y="54" width="64" height="18" rx="3" fill="#16A34A" opacity="0.4"/>
+              <text x="140" y="67" text-anchor="middle" font-family="Sora,sans-serif" font-weight="700" font-size="7" fill="rgba(255,255,255,0.7)">GOYAL STORE</text>
+              <!-- product cards -->
+              <rect x="108" y="78" width="28" height="32" rx="3" fill="rgba(22,163,74,0.2)" stroke="#16A34A" stroke-width="0.8"/>
+              <rect x="140" y="78" width="28" height="32" rx="3" fill="rgba(22,163,74,0.2)" stroke="#16A34A" stroke-width="0.8"/>
+              <rect x="108" y="114" width="28" height="32" rx="3" fill="rgba(22,163,74,0.2)" stroke="#16A34A" stroke-width="0.8"/>
+              <rect x="140" y="114" width="28" height="32" rx="3" fill="rgba(22,163,74,0.2)" stroke="#16A34A" stroke-width="0.8"/>
+              <!-- cart button -->
+              <rect x="108" y="150" width="60" height="14" rx="7" fill="#16A34A" opacity="0.7"/>
+              <text x="138" y="160" text-anchor="middle" font-family="Sora,sans-serif" font-weight="700" font-size="6" fill="white">ADD TO CART</text>
+              <!-- floating packages -->
+              <rect x="28" y="80" width="52" height="44" rx="6" fill="rgba(22,163,74,0.15)" stroke="#16A34A" stroke-width="1" transform="rotate(-12 28 80)"/>
+              <rect x="30" y="82" width="52" height="44" rx="6" fill="rgba(22,163,74,0.1)" stroke="#16A34A" stroke-width="0.8" transform="rotate(-6 30 82)"/>
+              <rect x="32" y="84" width="52" height="44" rx="6" fill="rgba(22,163,74,0.2)" stroke="#16A34A" stroke-width="1"/>
+              <path d="M36 106 l8-8 4 4 8-8" stroke="#16A34A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <!-- delivery arrow -->
+              <path d="M90 130 Q60 160 50 180" stroke="#16A34A" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.5"/>
+              <polygon points="46,182 52,174 58,184" fill="#16A34A" opacity="0.5"/>
+              <!-- delivery box right -->
+              <rect x="195" y="140" width="58" height="48" rx="6" fill="rgba(22,163,74,0.18)" stroke="#16A34A" stroke-width="1.2"/>
+              <path d="M195 155 h58" stroke="#16A34A" stroke-width="0.8" opacity="0.5"/>
+              <path d="M224 140 v48" stroke="#16A34A" stroke-width="0.8" opacity="0.5"/>
+              <path d="M210 148 l4 4 8-8" stroke="#16A34A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              <!-- stars / ratings -->
+              <text x="140" y="225" text-anchor="middle" font-family="monospace" font-size="18" fill="#16A34A" opacity="0.7">★★★★★</text>
+            </svg>
+          </div>
+        </div>
+        <div class="biz-visual-pill bottom-left">
+          <div class="biz-pill-icon" style="background:#F0FDF4;">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#16A34A" stroke-width="1.6" stroke-linecap="round"><path d="M1 1h3l2 9h9l2-6H6"/><circle cx="8" cy="15" r="1.5"/><circle cx="14" cy="15" r="1.5"/></svg>
+          </div>
+          <div><div class="biz-pill-num" style="color:#16A34A;">10K+</div><div class="biz-pill-label">Monthly Orders</div></div>
+        </div>
+        <div class="biz-visual-pill top-right">
+          <div class="biz-pill-icon" style="background:#F0FDF4;">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#16A34A" stroke-width="1.6"><path d="M9 1l2 5h5l-4 3 2 5-5-3-5 3 2-5-4-3h5z"/></svg>
+          </div>
+          <div><div class="biz-pill-num" style="color:#16A34A;">4.8★</div><div class="biz-pill-label">Customer Rating</div></div>
+        </div>
+      </div>
+
+      <!-- TEXT -->
+      <div class="biz-text">
+        <div class="biz-sector-num">03</div>
+        <div class="biz-sector-tag" style="background:#F0FDF4;color:#16A34A;border:1px solid #BBF7D0;">
+          E-Commerce
+        </div>
+        <h2 class="biz-title">Commerce Meets <span style="color:#16A34A;">Digital India</span></h2>
+        <p class="biz-desc">Goyal Group's e-commerce vertical harnesses India's digital boom, bringing construction materials, home products and consumer goods directly to buyers through online marketplaces and our own digital storefronts. We bridge the gap between manufacturers and end-customers with speed, trust and transparency.</p>
+        <div class="biz-metrics">
+          <div class="biz-metric"><div class="biz-metric-num">10K+</div><div class="biz-metric-label">Monthly Orders</div></div>
+          <div class="biz-metric"><div class="biz-metric-num">Multi-Platform</div><div class="biz-metric-label">Marketplace Presence</div></div>
+          <div class="biz-metric"><div class="biz-metric-num">D2C</div><div class="biz-metric-label">Direct Channels</div></div>
+        </div>
+        <div class="biz-products">
+          <span class="biz-product-tag">Amazon Seller</span>
+          <span class="biz-product-tag">Flipkart Store</span>
+          <span class="biz-product-tag">Own Storefront</span>
+          <span class="biz-product-tag">B2B Online Portal</span>
+          <span class="biz-product-tag">Construction Supplies</span>
+          <span class="biz-product-tag">Home Products</span>
+        </div>
+        <a href="#contact" class="biz-cta" style="background:#16A34A;">Explore E-Commerce ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     04 — REAL ESTATE
+════════════════════════════════════════════════ -->
+<section class="biz-section" id="realestate">
+  <div class="biz-section-inner">
+    <div class="biz-feature reverse">
+
+      <!-- VISUAL -->
+      <div class="biz-visual">
+        <div class="biz-visual-card">
+          <div class="biz-visual-bg" style="background:linear-gradient(135deg,#1a0a2e 0%,#0D1B2A 100%);min-height:380px;">
+            <div class="biz-visual-accent tl" style="background:#9333EA;"></div>
+            <div class="biz-visual-accent br" style="background:#7C3AED;"></div>
+            <svg class="biz-icon-large" width="280" height="260" viewBox="0 0 280 260" fill="none">
+              <!-- city skyline -->
+              <!-- tower 1 (tallest) -->
+              <rect x="95" y="40" width="50" height="185" rx="3" fill="rgba(147,51,234,0.12)" stroke="#9333EA" stroke-width="1.2"/>
+              <rect x="100" y="45" width="10" height="12" rx="1" fill="#9333EA" opacity="0.35"/>
+              <rect x="113" y="45" width="10" height="12" rx="1" fill="#9333EA" opacity="0.35"/>
+              <rect x="126" y="45" width="10" height="12" rx="1" fill="#9333EA" opacity="0.35"/>
+              <rect x="100" y="63" width="10" height="12" rx="1" fill="#9333EA" opacity="0.3"/>
+              <rect x="113" y="63" width="10" height="12" rx="1" fill="#9333EA" opacity="0.3"/>
+              <rect x="126" y="63" width="10" height="12" rx="1" fill="#9333EA" opacity="0.3"/>
+              <rect x="100" y="81" width="10" height="12" rx="1" fill="#9333EA" opacity="0.25"/>
+              <rect x="113" y="81" width="10" height="12" rx="1" fill="#9333EA" opacity="0.25"/>
+              <rect x="126" y="81" width="10" height="12" rx="1" fill="#9333EA" opacity="0.25"/>
+              <rect x="100" y="99" width="10" height="12" rx="1" fill="#9333EA" opacity="0.22"/>
+              <rect x="113" y="99" width="10" height="12" rx="1" fill="#9333EA" opacity="0.22"/>
+              <rect x="126" y="99" width="10" height="12" rx="1" fill="#9333EA" opacity="0.22"/>
+              <rect x="100" y="117" width="10" height="12" rx="1" fill="#9333EA" opacity="0.2"/>
+              <rect x="113" y="117" width="10" height="12" rx="1" fill="#9333EA" opacity="0.2"/>
+              <!-- tower 2 right -->
+              <rect x="150" y="80" width="40" height="145" rx="3" fill="rgba(147,51,234,0.1)" stroke="#9333EA" stroke-width="1"/>
+              <rect x="155" y="86" width="8" height="10" rx="1" fill="#9333EA" opacity="0.3"/>
+              <rect x="166" y="86" width="8" height="10" rx="1" fill="#9333EA" opacity="0.3"/>
+              <rect x="177" y="86" width="8" height="10" rx="1" fill="#9333EA" opacity="0.3"/>
+              <rect x="155" y="102" width="8" height="10" rx="1" fill="#9333EA" opacity="0.25"/>
+              <rect x="166" y="102" width="8" height="10" rx="1" fill="#9333EA" opacity="0.25"/>
+              <rect x="155" y="118" width="8" height="10" rx="1" fill="#9333EA" opacity="0.2"/>
+              <rect x="166" y="118" width="8" height="10" rx="1" fill="#9333EA" opacity="0.2"/>
+              <!-- tower 3 left -->
+              <rect x="48" y="100" width="40" height="125" rx="3" fill="rgba(147,51,234,0.1)" stroke="#9333EA" stroke-width="0.8"/>
+              <rect x="53" y="108" width="8" height="10" rx="1" fill="#9333EA" opacity="0.28"/>
+              <rect x="64" y="108" width="8" height="10" rx="1" fill="#9333EA" opacity="0.28"/>
+              <rect x="75" y="108" width="8" height="10" rx="1" fill="#9333EA" opacity="0.28"/>
+              <rect x="53" y="124" width="8" height="10" rx="1" fill="#9333EA" opacity="0.22"/>
+              <rect x="64" y="124" width="8" height="10" rx="1" fill="#9333EA" opacity="0.22"/>
+              <!-- small building -->
+              <rect x="198" y="140" width="34" height="85" rx="2" fill="rgba(147,51,234,0.08)" stroke="#9333EA" stroke-width="0.8"/>
+              <!-- ground -->
+              <rect x="30" y="225" width="220" height="6" rx="3" fill="#9333EA" opacity="0.2"/>
+              <!-- stars / lights in sky -->
+              <circle cx="60" cy="50" r="1.5" fill="#9333EA" opacity="0.5"/>
+              <circle cx="220" cy="35" r="1.5" fill="#9333EA" opacity="0.5"/>
+              <circle cx="180" cy="55" r="1" fill="#9333EA" opacity="0.4"/>
+              <circle cx="40" cy="80" r="1" fill="#9333EA" opacity="0.4"/>
+              <!-- moon -->
+              <path d="M230 60 A20 20 0 1 1 230 100 A14 14 0 1 0 230 60" fill="#9333EA" opacity="0.25"/>
+            </svg>
+          </div>
+        </div>
+        <div class="biz-visual-pill bottom-left">
+          <div class="biz-pill-icon" style="background:#FAF5FF;">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#9333EA" stroke-width="1.6" stroke-linecap="round"><path d="M2 16V7l7-5 7 5v9H2z"/><rect x="6" y="10" width="6" height="6" rx="1"/></svg>
+          </div>
+          <div><div class="biz-pill-num" style="color:#9333EA;">₹100Cr+</div><div class="biz-pill-label">Portfolio Value</div></div>
+        </div>
+        <div class="biz-visual-pill top-right">
+          <div class="biz-pill-icon" style="background:#FAF5FF;">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#9333EA" stroke-width="1.6"><path d="M9 2C5.7 2 3 4.7 3 8c0 4.5 6 9 6 9s6-4.5 6-9c0-3.3-2.7-6-6-6z"/><circle cx="9" cy="8" r="2"/></svg>
+          </div>
+          <div><div class="biz-pill-num" style="color:#9333EA;">Bengaluru</div><div class="biz-pill-label">Primary Market</div></div>
+        </div>
+      </div>
+
+      <!-- TEXT -->
+      <div class="biz-text">
+        <div class="biz-sector-num">04</div>
+        <div class="biz-sector-tag" style="background:#FAF5FF;color:#9333EA;border:1px solid #E9D5FF;">
+          Real Estate
+        </div>
+        <h2 class="biz-title">Building <span style="color:#9333EA;">Landmark</span> Spaces</h2>
+        <p class="biz-desc">Goyal Group's real estate vertical develops premium residential and commercial properties with a focus on quality construction, prime locations, and timely delivery. Backed by our deep expertise in construction materials, we ensure every project meets the highest standards inside and out.</p>
+        <div class="biz-metrics">
+          <div class="biz-metric"><div class="biz-metric-num">₹100Cr+</div><div class="biz-metric-label">Portfolio Value</div></div>
+          <div class="biz-metric"><div class="biz-metric-num">Residential</div><div class="biz-metric-label">& Commercial</div></div>
+          <div class="biz-metric"><div class="biz-metric-num">Bengaluru</div><div class="biz-metric-label">Primary Focus</div></div>
+        </div>
+        <div class="biz-products">
+          <span class="biz-product-tag">Residential Projects</span>
+          <span class="biz-product-tag">Commercial Spaces</span>
+          <span class="biz-product-tag">Land Acquisition</span>
+          <span class="biz-product-tag">Joint Ventures</span>
+          <span class="biz-product-tag">Project Management</span>
+          <span class="biz-product-tag">Property Consulting</span>
+        </div>
+        <a href="#contact" class="biz-cta" style="background:#9333EA;">Explore Real Estate ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     05 — WAREHOUSING & LOGISTICS
+════════════════════════════════════════════════ -->
+<section class="biz-section" id="warehousing">
+  <div class="biz-section-inner">
+    <div class="biz-feature">
+
+      <!-- VISUAL -->
+      <div class="biz-visual">
+        <div class="biz-visual-card">
+          <div class="biz-visual-bg" style="background:linear-gradient(135deg,#1c0a00 0%,#0D1B2A 100%);min-height:380px;">
+            <div class="biz-visual-accent tl" style="background:#EA580C;"></div>
+            <div class="biz-visual-accent br" style="background:#C2410C;"></div>
+            <svg class="biz-icon-large" width="280" height="260" viewBox="0 0 280 260" fill="none">
+              <!-- warehouse shell -->
+              <path d="M30 220 L30 100 L140 50 L250 100 L250 220 Z" fill="rgba(234,88,12,0.08)" stroke="#EA580C" stroke-width="1.2"/>
+              <!-- roof ridge -->
+              <line x1="140" y1="50" x2="140" y2="220" stroke="#EA580C" stroke-width="0.8" stroke-dasharray="4 4" opacity="0.3"/>
+              <!-- loading bays -->
+              <rect x="50" y="170" width="36" height="50" rx="2" fill="rgba(234,88,12,0.25)" stroke="#EA580C" stroke-width="1"/>
+              <rect x="122" y="170" width="36" height="50" rx="2" fill="rgba(234,88,12,0.25)" stroke="#EA580C" stroke-width="1"/>
+              <rect x="194" y="170" width="36" height="50" rx="2" fill="rgba(234,88,12,0.25)" stroke="#EA580C" stroke-width="1"/>
+              <!-- bay lines -->
+              <line x1="68" y1="170" x2="68" y2="220" stroke="#EA580C" stroke-width="0.5" opacity="0.4"/>
+              <line x1="140" y1="170" x2="140" y2="220" stroke="#EA580C" stroke-width="0.5" opacity="0.4"/>
+              <line x1="212" y1="170" x2="212" y2="220" stroke="#EA580C" stroke-width="0.5" opacity="0.4"/>
+              <!-- shelving rack left -->
+              <line x1="50" y1="115" x2="50" y2="165" stroke="#EA580C" stroke-width="2" opacity="0.5"/>
+              <line x1="90" y1="115" x2="90" y2="165" stroke="#EA580C" stroke-width="2" opacity="0.5"/>
+              <line x1="50" y1="130" x2="90" y2="130" stroke="#EA580C" stroke-width="1.5" opacity="0.5"/>
+              <line x1="50" y1="147" x2="90" y2="147" stroke="#EA580C" stroke-width="1.5" opacity="0.5"/>
+              <rect x="52" y="132" width="10" height="14" rx="1" fill="#EA580C" opacity="0.4"/>
+              <rect x="65" y="132" width="10" height="14" rx="1" fill="#EA580C" opacity="0.35"/>
+              <rect x="78" y="132" width="10" height="14" rx="1" fill="#EA580C" opacity="0.3"/>
+              <rect x="52" y="149" width="10" height="14" rx="1" fill="#EA580C" opacity="0.35"/>
+              <rect x="65" y="149" width="10" height="14" rx="1" fill="#EA580C" opacity="0.3"/>
+              <!-- shelving rack right -->
+              <line x1="190" y1="115" x2="190" y2="165" stroke="#EA580C" stroke-width="2" opacity="0.5"/>
+              <line x1="230" y1="115" x2="230" y2="165" stroke="#EA580C" stroke-width="2" opacity="0.5"/>
+              <line x1="190" y1="130" x2="230" y2="130" stroke="#EA580C" stroke-width="1.5" opacity="0.5"/>
+              <line x1="190" y1="147" x2="230" y2="147" stroke="#EA580C" stroke-width="1.5" opacity="0.5"/>
+              <rect x="192" y="132" width="10" height="14" rx="1" fill="#EA580C" opacity="0.4"/>
+              <rect x="205" y="132" width="10" height="14" rx="1" fill="#EA580C" opacity="0.35"/>
+              <rect x="218" y="132" width="10" height="14" rx="1" fill="#EA580C" opacity="0.3"/>
+              <!-- forklift -->
+              <rect x="118" y="150" width="40" height="22" rx="2" fill="rgba(234,88,12,0.3)" stroke="#EA580C" stroke-width="1"/>
+              <rect x="128" y="138" width="6" height="18" rx="1" fill="#EA580C" opacity="0.6"/>
+              <rect x="136" y="138" width="6" height="18" rx="1" fill="#EA580C" opacity="0.6"/>
+              <circle cx="122" cy="174" r="5" fill="#0D1B2A" stroke="#EA580C" stroke-width="1.2"/>
+              <circle cx="154" cy="174" r="5" fill="#0D1B2A" stroke="#EA580C" stroke-width="1.2"/>
+              <!-- truck outside -->
+              <rect x="30" y="200" width="60" height="20" rx="2" fill="rgba(234,88,12,0.2)" stroke="#EA580C" stroke-width="1"/>
+              <rect x="20" y="207" width="18" height="13" rx="2" fill="rgba(234,88,12,0.3)" stroke="#EA580C" stroke-width="0.8"/>
+              <circle cx="35" cy="222" r="5" fill="#0D1B2A" stroke="#EA580C" stroke-width="1"/>
+              <circle cx="75" cy="222" r="5" fill="#0D1B2A" stroke="#EA580C" stroke-width="1"/>
+            </svg>
+          </div>
+        </div>
+        <div class="biz-visual-pill bottom-left">
+          <div class="biz-pill-icon" style="background:#FFF7ED;">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#EA580C" stroke-width="1.6" stroke-linecap="round"><rect x="2" y="8" width="14" height="9" rx="2"/><path d="M6 8V6a3 3 0 016 0v2"/><path d="M16 11l-7 4-7-4"/></svg>
+          </div>
+          <div><div class="biz-pill-num" style="color:#EA580C;">2L sq.ft+</div><div class="biz-pill-label">Warehouse Space</div></div>
+        </div>
+        <div class="biz-visual-pill top-right">
+          <div class="biz-pill-icon" style="background:#FFF7ED;">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#EA580C" stroke-width="1.6"><path d="M9 1l2 5h5l-4 3 2 5-5-3-5 3 2-5-4-3h5z"/></svg>
+          </div>
+          <div><div class="biz-pill-num" style="color:#EA580C;">24×7</div><div class="biz-pill-label">Operations</div></div>
+        </div>
+      </div>
+
+      <!-- TEXT -->
+      <div class="biz-text">
+        <div class="biz-sector-num">05</div>
+        <div class="biz-sector-tag" style="background:#FFF7ED;color:#EA580C;border:1px solid #FED7AA;">
+          Warehousing & Logistics
+        </div>
+        <h2 class="biz-title">The <span style="color:#EA580C;">Backbone</span> of Our Supply Chain</h2>
+        <p class="biz-desc">Our state-of-the-art warehousing and logistics infrastructure underpins the entire Goyal Group operation. With over 2 lakh sq. ft. of storage across strategic locations in Karnataka, we ensure fast, reliable and cost-effective movement of goods — from manufacturers to end customers.</p>
+        <div class="biz-metrics">
+          <div class="biz-metric"><div class="biz-metric-num">2L sq.ft</div><div class="biz-metric-label">Storage Capacity</div></div>
+          <div class="biz-metric"><div class="biz-metric-num">Multi-City</div><div class="biz-metric-label">Network</div></div>
+          <div class="biz-metric"><div class="biz-metric-num">24×7</div><div class="biz-metric-label">Operations</div></div>
+        </div>
+        <div class="biz-products">
+          <span class="biz-product-tag">Cold & Dry Storage</span>
+          <span class="biz-product-tag">Last-Mile Delivery</span>
+          <span class="biz-product-tag">Inventory Management</span>
+          <span class="biz-product-tag">3PL Services</span>
+          <span class="biz-product-tag">Fleet Management</span>
+          <span class="biz-product-tag">Track & Trace</span>
+        </div>
+        <a href="#contact" class="biz-cta" style="background:#EA580C;">Explore Warehousing ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA BANNER ── -->
+<section class="cta-banner" id="contact">
+  <div class="cta-banner-inner">
+    <div class="page-hero-tag" style="margin:0 auto 24px;">Let's Collaborate</div>
+    <h2 class="cta-heading">Ready to Partner with<br><span>Goyal Group?</span></h2>
+    <p class="cta-body">Whether you're a developer, distributor, investor or brand looking to scale — we have the network, infrastructure and expertise to make it happen.</p>
+    <div class="cta-btns">
+      <a href="mailto:vikas@thegoyalgroup.com" class="cta-btn-gold">Send Us a Message ↗</a>
+      <a href="tel:+918022106583" class="cta-btn-ghost">📞 080 2210 6583</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <svg width="30" height="30" viewBox="0 0 44 44" fill="none"><polygon points="22,6 36.5,14 36.5,30 22,38 7.5,30 7.5,14" fill="url(#hgf)"/><defs><linearGradient id="hgf" x1="7.5" y1="6" x2="36.5" y2="38" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#E8C97A"/><stop offset="100%" stop-color="#B8872C"/></linearGradient></defs><text x="22" y="27" text-anchor="middle" font-family="Sora,sans-serif" font-weight="800" font-size="15" fill="#0D1B2A">G</text></svg>
+      <span style="font-family:'Sora',sans-serif;font-weight:700;font-size:0.85rem;color:rgba(255,255,255,0.45);letter-spacing:0.08em;">GOYAL GROUP</span>
+    </div>
+    <p class="footer-copy">© 2025 Goyal Group. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="goyal-group-homepage.html">← Back to Home</a>
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Smooth scroll for filter tabs
+function scrollTo(id) {
+  const el = document.getElementById(id);
+  if (el) {
+    const offset = 130;
+    const top = el.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: 'smooth' });
+  }
+  // update active tab
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+}
+
+// Update active filter on scroll
+const sections = ['construction','automotive','ecommerce','realestate','warehousing'];
+const filterBtns = document.querySelectorAll('.filter-btn');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && window.scrollY + 200 >= el.offsetTop) current = id;
+  });
+  filterBtns.forEach((btn, i) => {
+    btn.classList.toggle('active', sections[i] === current);
+  });
+});
+
+// Marquee duplication for seamless loop
+const track = document.getElementById('marqueeTrack');
+if (track) {
+  track.innerHTML += track.innerHTML;
+}
+
+// Scroll animation on section entries
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.biz-feature, .product-grid').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(32px)';
+  el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us — Goyal Group</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-dim: rgba(201,168,76,0.14);
+    --navy: #0D1B2A;
+    --white: #FFFFFF;
+    --grey-bg: #F5F6F8;
+    --grey-text: #6B7280;
+    --border: #E4E7EC;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--grey-bg); color: var(--navy); overflow-x: hidden; }
+
+  /* ── NAVBAR ── */
+  .navbar-wrapper { position: fixed; top: 16px; left: 50%; transform: translateX(-50%); width: calc(100% - 48px); max-width: 1240px; z-index: 200; }
+  .navbar { background: var(--white); border-radius: 50px; padding: 12px 22px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 4px 32px rgba(13,27,42,0.12); }
+  .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+  .logo-hex { width: 42px; height: 42px; }
+  .logo-text .goyal { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.1rem; color: var(--navy); letter-spacing: 0.08em; display: block; }
+  .logo-text .group { font-family: 'Sora', sans-serif; font-weight: 600; font-size: 0.58rem; color: var(--gold); letter-spacing: 0.22em; text-transform: uppercase; display: block; margin-top: 1px; }
+  .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+  .nav-links a { font-size: 0.8rem; font-weight: 500; color: #374151; text-decoration: none; padding: 6px 10px; border-radius: 20px; white-space: nowrap; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-links .active { color: var(--navy); font-weight: 700; position: relative; }
+  .nav-links .active::after { content: ''; position: absolute; bottom: 2px; left: 10px; right: 10px; height: 2px; background: var(--gold); border-radius: 2px; }
+  .nav-cta { background: var(--navy); color: var(--white); padding: 10px 20px; border-radius: 50px; font-weight: 700; font-size: 0.8rem; display: flex; align-items: center; gap: 6px; flex-shrink: 0; text-decoration: none; transition: background 0.2s, transform 0.2s; }
+  .nav-cta:hover { background: #1a2f47; transform: translateY(-1px); }
+  @media (max-width: 900px) { .nav-links { display: none; } }
+
+  /* ── PAGE HERO ── */
+  .page-hero { background: var(--navy); padding: 130px 24px 90px; position: relative; overflow: hidden; }
+  .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; }
+  .hero-ring1 { position: absolute; top: -120px; right: -120px; width: 520px; height: 520px; border-radius: 50%; border: 80px solid rgba(201,168,76,0.05); pointer-events: none; }
+  .hero-ring2 { position: absolute; bottom: -80px; left: -60px; width: 340px; height: 340px; border-radius: 50%; border: 60px solid rgba(201,168,76,0.04); pointer-events: none; }
+  .page-hero-inner { max-width: 1240px; margin: 0 auto; position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .breadcrumb { display: flex; align-items: center; gap: 8px; margin-bottom: 22px; }
+  .breadcrumb a { font-size: 0.78rem; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--gold); }
+  .breadcrumb-sep { color: rgba(255,255,255,0.22); font-size: 0.75rem; }
+  .breadcrumb span { font-size: 0.78rem; color: var(--gold); font-weight: 600; }
+  .page-hero-tag { display: inline-flex; align-items: center; gap: 8px; background: var(--gold-dim); border: 1px solid rgba(201,168,76,0.3); border-radius: 50px; padding: 6px 14px; font-size: 0.74rem; font-weight: 600; color: var(--gold); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 18px; }
+  .page-hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+  .page-hero-heading { font-family: 'Sora', sans-serif; font-weight: 800; font-size: clamp(2.4rem, 4.5vw, 3.6rem); color: var(--white); line-height: 1.08; margin-bottom: 18px; }
+  .page-hero-heading span { color: var(--gold); }
+  .page-hero-body { font-size: 0.96rem; line-height: 1.78; color: rgba(255,255,255,0.58); max-width: 480px; }
+
+  /* hero right quick-contact cards */
+  .hero-contact-cards { display: flex; flex-direction: column; gap: 14px; }
+  .hcc { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09); border-radius: 16px; padding: 18px 20px; display: flex; align-items: center; gap: 16px; cursor: pointer; transition: border-color 0.2s, background 0.2s; text-decoration: none; }
+  .hcc:hover { border-color: rgba(201,168,76,0.45); background: rgba(201,168,76,0.06); }
+  .hcc-icon { width: 44px; height: 44px; border-radius: 12px; background: var(--gold-dim); border: 1px solid rgba(201,168,76,0.25); display: flex; align-items: center; justify-content: center; color: var(--gold); flex-shrink: 0; }
+  .hcc-label { font-size: 0.7rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+  .hcc-value { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.92rem; color: var(--white); }
+  .hcc-arrow { margin-left: auto; color: rgba(255,255,255,0.25); font-size: 1rem; transition: color 0.2s, transform 0.2s; }
+  .hcc:hover .hcc-arrow { color: var(--gold); transform: translateX(3px); }
+
+  @media (max-width: 860px) {
+    .page-hero-inner { grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  /* ── MAIN CONTENT GRID ── */
+  .main-wrap { max-width: 1240px; margin: 0 auto; padding: 72px 24px 90px; display: grid; grid-template-columns: 1fr 420px; gap: 40px; align-items: start; }
+  @media (max-width: 1000px) { .main-wrap { grid-template-columns: 1fr; } }
+
+  /* ── CONTACT FORM CARD ── */
+  .form-card { background: var(--white); border-radius: 24px; padding: 44px 40px; box-shadow: 0 8px 48px rgba(13,27,42,0.08); }
+  .form-card-heading { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.55rem; color: var(--navy); margin-bottom: 6px; }
+  .form-card-sub { font-size: 0.88rem; color: var(--grey-text); line-height: 1.6; margin-bottom: 32px; }
+
+  /* purpose tabs */
+  .purpose-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+  .purpose-tab { font-size: 0.78rem; font-weight: 600; color: var(--grey-text); background: var(--grey-bg); border: 1.5px solid var(--border); border-radius: 50px; padding: 7px 16px; cursor: pointer; transition: all 0.2s; user-select: none; }
+  .purpose-tab:hover { border-color: var(--gold); color: var(--navy); }
+  .purpose-tab.active { background: var(--gold-dim); border-color: var(--gold); color: var(--navy); font-weight: 700; }
+
+  /* form fields */
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+  .form-group label { font-size: 0.78rem; font-weight: 600; color: var(--navy); letter-spacing: 0.01em; }
+  .form-group label span { color: var(--gold); }
+  .form-group input, .form-group select, .form-group textarea {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.88rem;
+    color: var(--navy);
+    background: var(--grey-bg);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    padding: 11px 14px;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    width: 100%;
+    resize: none;
+    appearance: none;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--gold);
+    background: var(--white);
+    box-shadow: 0 0 0 3px rgba(201,168,76,0.12);
+  }
+  .form-group input::placeholder, .form-group textarea::placeholder { color: #B0B7C3; }
+  .form-group textarea { min-height: 110px; }
+  .input-with-icon { position: relative; }
+  .input-with-icon svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: #B0B7C3; pointer-events: none; }
+  .input-with-icon input { padding-left: 38px; }
+
+  .submit-btn {
+    width: 100%;
+    background: var(--navy);
+    color: var(--white);
+    border: none;
+    border-radius: 12px;
+    padding: 14px 24px;
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 0.92rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: background 0.2s, transform 0.2s;
+    margin-top: 4px;
+  }
+  .submit-btn:hover { background: var(--gold); color: var(--navy); transform: translateY(-2px); }
+  .submit-btn svg { transition: transform 0.2s; }
+  .submit-btn:hover svg { transform: translateX(3px); }
+
+  .form-note { font-size: 0.73rem; color: #B0B7C3; text-align: center; margin-top: 12px; line-height: 1.5; }
+
+  /* success state */
+  .success-overlay { display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px; }
+  .success-overlay.show { display: flex; }
+  .success-check { width: 72px; height: 72px; border-radius: 50%; background: rgba(22,163,74,0.12); border: 2px solid rgba(22,163,74,0.4); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+  .success-title { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.4rem; color: var(--navy); margin-bottom: 10px; }
+  .success-body { font-size: 0.9rem; color: var(--grey-text); line-height: 1.65; margin-bottom: 24px; }
+  .success-back { font-size: 0.82rem; color: var(--gold); font-weight: 600; cursor: pointer; text-decoration: underline; }
+
+  /* ── SIDEBAR ── */
+  .sidebar { display: flex; flex-direction: column; gap: 20px; }
+
+  /* Info card */
+  .info-card { background: var(--navy); border-radius: 20px; padding: 30px 28px; }
+  .info-card-heading { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.05rem; color: var(--white); margin-bottom: 6px; }
+  .info-card-sub { font-size: 0.8rem; color: rgba(255,255,255,0.45); margin-bottom: 24px; line-height: 1.55; }
+  .info-item { display: flex; gap: 14px; align-items: flex-start; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .info-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .info-icon { width: 38px; height: 38px; border-radius: 10px; background: var(--gold-dim); border: 1px solid rgba(201,168,76,0.22); display: flex; align-items: center; justify-content: center; color: var(--gold); flex-shrink: 0; margin-top: 2px; }
+  .info-label { font-size: 0.68rem; color: rgba(255,255,255,0.38); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 5px; }
+  .info-value { font-family: 'Sora', sans-serif; font-weight: 600; font-size: 0.88rem; color: var(--white); line-height: 1.45; }
+  .info-value a { color: var(--white); text-decoration: none; transition: color 0.2s; }
+  .info-value a:hover { color: var(--gold); }
+
+  /* Hours card */
+  .hours-card { background: var(--white); border-radius: 20px; padding: 24px 26px; box-shadow: 0 4px 20px rgba(13,27,42,0.07); }
+  .hours-card-heading { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--navy); margin-bottom: 16px; display: flex; align-items: center; gap: 9px; }
+  .hours-dot { width: 8px; height: 8px; border-radius: 50%; background: #16A34A; box-shadow: 0 0 0 3px rgba(22,163,74,0.2); }
+  .hours-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); }
+  .hours-row:last-child { border-bottom: none; }
+  .hours-day { font-size: 0.8rem; color: var(--grey-text); font-weight: 500; }
+  .hours-time { font-size: 0.8rem; font-weight: 700; color: var(--navy); }
+  .hours-time.closed { color: #EF4444; font-weight: 500; }
+
+  /* Team card */
+  .team-card { background: var(--white); border-radius: 20px; padding: 24px 26px; box-shadow: 0 4px 20px rgba(13,27,42,0.07); }
+  .team-card-heading { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--navy); margin-bottom: 16px; }
+  .team-person { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .team-person:last-child { border-bottom: none; }
+  .team-avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--navy), #1a3050); display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-weight: 800; font-size: 0.8rem; color: var(--gold); flex-shrink: 0; }
+  .team-name { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.85rem; color: var(--navy); }
+  .team-role { font-size: 0.72rem; color: var(--grey-text); margin-top: 1px; }
+  .team-actions { margin-left: auto; display: flex; gap: 6px; }
+  .team-btn { width: 30px; height: 30px; border-radius: 8px; background: var(--grey-bg); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--grey-text); cursor: pointer; text-decoration: none; transition: background 0.2s, color 0.2s, border-color 0.2s; }
+  .team-btn:hover { background: var(--gold-dim); border-color: rgba(201,168,76,0.4); color: var(--gold); }
+
+  /* Social card */
+  .social-card { background: linear-gradient(135deg, var(--gold) 0%, #B8872C 100%); border-radius: 20px; padding: 24px 26px; }
+  .social-card-heading { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1rem; color: var(--navy); margin-bottom: 6px; }
+  .social-card-sub { font-size: 0.78rem; color: rgba(13,27,42,0.6); margin-bottom: 18px; line-height: 1.5; }
+  .social-icons { display: flex; gap: 10px; }
+  .social-btn { width: 40px; height: 40px; border-radius: 10px; background: rgba(13,27,42,0.12); display: flex; align-items: center; justify-content: center; color: var(--navy); text-decoration: none; font-weight: 800; font-size: 0.8rem; transition: background 0.2s, transform 0.2s; }
+  .social-btn:hover { background: rgba(13,27,42,0.25); transform: translateY(-2px); }
+
+  /* ── MAP SECTION ── */
+  .map-section { background: var(--white); padding: 0 0 80px; }
+  .map-inner { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+  .map-header { display: flex; align-items: flex-end; justify-content: space-between; padding: 56px 0 28px; flex-wrap: wrap; gap: 16px; }
+  .map-heading { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.55rem; color: var(--navy); }
+  .map-heading span { color: var(--gold); }
+  .map-sub { font-size: 0.85rem; color: var(--grey-text); margin-top: 6px; }
+  .map-offices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 28px; }
+  @media (max-width: 700px) { .map-offices { grid-template-columns: 1fr; } }
+  .office-card { border: 2px solid var(--border); border-radius: 14px; padding: 18px 20px; cursor: pointer; transition: all 0.2s; }
+  .office-card:hover, .office-card.active { border-color: var(--gold); background: rgba(201,168,76,0.04); }
+  .office-card.active .office-name { color: var(--gold); }
+  .office-type { font-size: 0.68rem; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+  .office-name { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.9rem; color: var(--navy); margin-bottom: 4px; transition: color 0.2s; }
+  .office-address { font-size: 0.78rem; color: var(--grey-text); line-height: 1.55; }
+
+  /* SVG map placeholder */
+  .map-container { background: linear-gradient(135deg, #0D1B2A 0%, #142233 100%); border-radius: 20px; height: 320px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .map-grid-lines { position: absolute; inset: 0; background-image: linear-gradient(rgba(201,168,76,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,0.06) 1px, transparent 1px); background-size: 40px 40px; }
+  .map-pin { position: absolute; display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; transition: transform 0.2s; }
+  .map-pin:hover { transform: scale(1.15); }
+  .map-pin-circle { width: 14px; height: 14px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 4px rgba(201,168,76,0.25), 0 0 0 8px rgba(201,168,76,0.1); }
+  .map-pin-label { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.65rem; color: var(--white); background: rgba(13,27,42,0.85); padding: 3px 7px; border-radius: 50px; white-space: nowrap; }
+  /* India outline SVG approximate */
+  .india-outline { opacity: 0.15; }
+  .map-center-text { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 0.8rem; color: rgba(201,168,76,0.4); letter-spacing: 0.15em; text-transform: uppercase; }
+
+  /* ── FAQ SECTION ── */
+  .faq-section { background: var(--grey-bg); padding: 80px 24px; }
+  .faq-inner { max-width: 780px; margin: 0 auto; }
+  .faq-header { text-align: center; margin-bottom: 44px; }
+  .faq-heading { font-family: 'Sora', sans-serif; font-weight: 800; font-size: clamp(1.7rem, 3vw, 2.2rem); color: var(--navy); margin-bottom: 10px; }
+  .faq-heading span { color: var(--gold); }
+  .faq-sub { font-size: 0.9rem; color: var(--grey-text); line-height: 1.65; }
+  .faq-list { display: flex; flex-direction: column; gap: 10px; }
+  .faq-item { background: var(--white); border-radius: 14px; border: 1.5px solid var(--border); overflow: hidden; transition: border-color 0.2s; }
+  .faq-item.open { border-color: rgba(201,168,76,0.4); }
+  .faq-q { display: flex; align-items: center; justify-content: space-between; padding: 18px 22px; cursor: pointer; gap: 12px; }
+  .faq-q-text { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.92rem; color: var(--navy); }
+  .faq-icon { width: 28px; height: 28px; border-radius: 50%; background: var(--grey-bg); border: 1.5px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--grey-text); flex-shrink: 0; transition: all 0.25s; }
+  .faq-item.open .faq-icon { background: var(--gold-dim); border-color: var(--gold); color: var(--gold); transform: rotate(45deg); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.35s ease, padding 0.25s; }
+  .faq-item.open .faq-a { max-height: 300px; }
+  .faq-a-inner { padding: 0 22px 18px; font-size: 0.87rem; color: var(--grey-text); line-height: 1.72; }
+
+  /* ── FOOTER ── */
+  .footer { background: #060d15; padding: 36px 24px 24px; }
+  .footer-inner { max-width: 1240px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
+  .footer-copy { font-size: 0.77rem; color: rgba(255,255,255,0.3); }
+  .footer-links { display: flex; gap: 22px; }
+  .footer-links a { font-size: 0.77rem; color: rgba(255,255,255,0.38); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--gold); }
+
+  /* ── ANIMATIONS ── */
+  .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar-wrapper">
+  <nav class="navbar">
+    <a href="goyal-group-homepage.html" class="logo">
+      <svg class="logo-hex" viewBox="0 0 44 44" fill="none">
+        <polygon points="22,6 36.5,14 36.5,30 22,38 7.5,30 7.5,14" fill="url(#hg)"/>
+        <defs><linearGradient id="hg" x1="7.5" y1="6" x2="36.5" y2="38" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#E8C97A"/><stop offset="100%" stop-color="#B8872C"/></linearGradient></defs>
+        <text x="22" y="27" text-anchor="middle" font-family="Sora,sans-serif" font-weight="800" font-size="15" fill="#0D1B2A">G</text>
+      </svg>
+      <div class="logo-text"><span class="goyal">GOYAL</span><span class="group">GROUP</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="#">Our Businesses</a></li>
+      <li><a href="sustainabality.html">Sustainability</a></li>
+      <li><a href="inv">Investors</a></li>
+      <li><a href="c">Careers</a></li>
+      <li><a href="contact.html" class="active">Contact Us</a></li>
+    </ul>
+    <a href="contact.html" class="nav-cta">Send Message ↗</a>
+  </nav>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="hero-grid"></div>
+  <div class="hero-ring1"></div>
+  <div class="hero-ring2"></div>
+  <div class="page-hero-inner">
+    <div>
+      <div class="breadcrumb">
+        <a href="goyal-group-homepage.html">Home</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>Contact Us</span>
+      </div>
+      <div class="page-hero-tag">Contact Us</div>
+      <h1 class="page-hero-heading">Let's Build<br>Something <span>Great</span><br>Together.</h1>
+      <p class="page-hero-body">Whether you're a builder, distributor, investor or brand partner — we'd love to hear from you. Reach out and our team will get back to you within 24 hours.</p>
+    </div>
+    <div class="hero-contact-cards">
+      <a href="tel:+919845743808" class="hcc">
+        <div class="hcc-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5a2 2 0 012-2h2.28a1 1 0 01.95.68l1.1 3.3a1 1 0 01-.23 1.02L8 9a11 11 0 005 5l.99-1.1a1 1 0 011.02-.23l3.3 1.1c.42.14.68.53.68.95V17a2 2 0 01-2 2C8.16 19 1 11.84 1 3a2 2 0 012-2h.01"/></svg>
+        </div>
+        <div>
+          <div class="hcc-label">Vikas Goyal — Partner</div>
+          <div class="hcc-value">+91 98457 43808</div>
+        </div>
+        <span class="hcc-arrow">↗</span>
+      </a>
+      <a href="tel:+919845011981" class="hcc">
+        <div class="hcc-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5a2 2 0 012-2h2.28a1 1 0 01.95.68l1.1 3.3a1 1 0 01-.23 1.02L8 9a11 11 0 005 5l.99-1.1a1 1 0 011.02-.23l3.3 1.1c.42.14.68.53.68.95V17a2 2 0 01-2 2C8.16 19 1 11.84 1 3a2 2 0 012-2h.01"/></svg>
+        </div>
+        <div>
+          <div class="hcc-label">R.P. Goyal — Chairman & MD</div>
+          <div class="hcc-value">+91 98450 11981</div>
+        </div>
+        <span class="hcc-arrow">↗</span>
+      </a>
+      <a href="tel:+919066048777" class="hcc">
+        <div class="hcc-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="10" cy="8" r="4"/><path d="M3 18c0-3.31 3.13-6 7-6s7 2.69 7 6"/></svg>
+        </div>
+        <div>
+          <div class="hcc-label">Gopal Gupta — Manager</div>
+          <div class="hcc-value">+91 90660 48777</div>
+        </div>
+        <span class="hcc-arrow">↗</span>
+      </a>
+      <a href="tel:+918022106583" class="hcc">
+        <div class="hcc-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="3" y="3" width="14" height="14" rx="3"/><path d="M7 8h6M7 12h4"/></svg>
+        </div>
+        <div>
+          <div class="hcc-label">Office Landline</div>
+          <div class="hcc-value">080 2210 6583</div>
+        </div>
+        <span class="hcc-arrow">↗</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<div class="main-wrap" id="form">
+
+  <!-- FORM CARD -->
+  <div class="form-card fade-in">
+    <h2 class="form-card-heading">Send Us a Message</h2>
+    <p class="form-card-sub">Fill in the form below and our team will respond within 24 business hours.</p>
+
+    <!-- Purpose tabs -->
+    <div class="purpose-tabs">
+      <div class="purpose-tab active" onclick="selectTab(this)">Business Inquiry</div>
+      <div class="purpose-tab" onclick="selectTab(this)">Construction Supply</div>
+      <div class="purpose-tab" onclick="selectTab(this)">Real Estate</div>
+      <div class="purpose-tab" onclick="selectTab(this)">Partnership</div>
+      <div class="purpose-tab" onclick="selectTab(this)">Other</div>
+    </div>
+
+    <div id="formContent">
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name <span>*</span></label>
+          <input type="text" placeholder="Rahul" id="firstName"/>
+        </div>
+        <div class="form-group">
+          <label>Last Name <span>*</span></label>
+          <input type="text" placeholder="Sharma" id="lastName"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Email Address <span>*</span></label>
+        <div class="input-with-icon">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="1" y="3" width="14" height="10" rx="2"/><path d="M1 5l7 5 7-5"/></svg>
+          <input type="email" placeholder="rahul@company.com" id="email"/>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Phone Number <span>*</span></label>
+          <div class="input-with-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2 4a1.5 1.5 0 011.5-1.5h1.6a.75.75 0 01.71.51l.83 2.48a.75.75 0 01-.17.76L5.4 7.3a8.5 8.5 0 003.3 3.3l1.05-1.05a.75.75 0 01.76-.17l2.48.83a.75.75 0 01.51.71V12.5A1.5 1.5 0 0112 14C6.48 14 2 9.52 2 4z"/></svg>
+            <input type="tel" placeholder="+91 98765 43210" id="phone"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Company / Organisation</label>
+          <input type="text" placeholder="Prestige Group" id="company"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Business Type</label>
+        <select id="bizType">
+          <option value="" disabled selected>Select your business type</option>
+          <option>Real Estate Developer</option>
+          <option>Construction Contractor</option>
+          <option>Architect / Designer</option>
+          <option>Distributor / Dealer</option>
+          <option>Individual / Homeowner</option>
+          <option>Investor</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Your Message <span>*</span></label>
+        <textarea placeholder="Tell us about your project, requirements or enquiry..." id="message"></textarea>
+      </div>
+
+      <button class="submit-btn" onclick="submitForm()">
+        Send Message
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h12M10 4l5 5-5 5"/></svg>
+      </button>
+      <p class="form-note">🔒 Your information is secure and will never be shared with third parties.</p>
+    </div>
+
+    <!-- Success state -->
+    <div class="success-overlay" id="successOverlay">
+      <div class="success-check">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="#16A34A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16l7 7 13-13"/></svg>
+      </div>
+      <div class="success-title">Message Sent!</div>
+      <div class="success-body">Thank you for reaching out. A member of the Goyal Group team will contact you within 24 business hours.</div>
+      <span class="success-back" onclick="resetForm()">← Send another message</span>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+
+    <!-- Info card -->
+    <div class="info-card fade-in">
+      <div class="info-card-heading">Contact Information</div>
+      <div class="info-card-sub">Reach us directly via any of the channels below — we're always available.</div>
+
+      <div class="info-item">
+        <div class="info-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2 4a1 1 0 011-1h1.8a.75.75 0 01.7.49l.8 2.4a.75.75 0 01-.17.77l-.97.97a7.5 7.5 0 003 3l.97-.97a.75.75 0 01.77-.17l2.4.8a.75.75 0 01.48.7V13a1 1 0 01-1 1C7 14 2 9 2 4z"/></svg>
+        </div>
+        <div>
+          <div class="info-label">Office</div>
+          <div class="info-value"><a href="tel:+918022106583">080 2210 6583</a></div>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="1" y="3" width="16" height="12" rx="2"/><path d="M1 6l8 5 8-5"/></svg>
+        </div>
+        <div>
+          <div class="info-label">Email — Vikas Goyal</div>
+          <div class="info-value"><a href="mailto:vikas@thegoyalgroup.com">vikas@thegoyalgroup.com</a></div>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="1" y="3" width="16" height="12" rx="2"/><path d="M1 6l8 5 8-5"/></svg>
+        </div>
+        <div>
+          <div class="info-label">Email — R.P. Goyal</div>
+          <div class="info-value"><a href="mailto:rpgoyals@yahoo.com">rpgoyals@yahoo.com</a></div>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="1" y="3" width="16" height="12" rx="2"/><path d="M1 6l8 5 8-5"/></svg>
+        </div>
+        <div>
+          <div class="info-label">Sales Email</div>
+          <div class="info-value"><a href="mailto:Salesvikasenterprises@gmail.com">Salesvikasenterprises@gmail.com</a></div>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <div class="info-icon">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M9 2C5.7 2 3 4.7 3 8c0 4.5 6 9 6 9s6-4.5 6-9c0-3.3-2.7-6-6-6z"/><circle cx="9" cy="8" r="2"/></svg>
+        </div>
+        <div>
+          <div class="info-label">Head Office</div>
+          <div class="info-value">Bengaluru, Karnataka, India</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hours -->
+    <div class="hours-card fade-in">
+      <div class="hours-card-heading">
+        <span class="hours-dot"></span> Business Hours
+      </div>
+      <div class="hours-row"><span class="hours-day">Monday – Friday</span><span class="hours-time">9:00 AM – 6:30 PM</span></div>
+      <div class="hours-row"><span class="hours-day">Saturday</span><span class="hours-time">9:00 AM – 2:00 PM</span></div>
+      <div class="hours-row"><span class="hours-day">Sunday</span><span class="hours-time closed">Closed</span></div>
+    </div>
+
+    <!-- Team -->
+    <div class="team-card fade-in">
+      <div class="team-card-heading">Our Team</div>
+      <div class="team-person">
+        <div class="team-avatar">RPG</div>
+        <div>
+          <div class="team-name">R.P. Goyal</div>
+          <div class="team-role">Chairman & Managing Director</div>
+        </div>
+        <div class="team-actions">
+          <a href="tel:+919845011981" class="team-btn" title="Call">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M1.5 3a.75.75 0 01.75-.75h1.2a.5.5 0 01.47.34l.55 1.65a.5.5 0 01-.12.51l-.63.63a5 5 0 001.9 1.9l.63-.63a.5.5 0 01.51-.12l1.65.55a.5.5 0 01.34.47V9A.75.75 0 019 9.75C4.72 9.75 1.5 6.53 1.5 3z"/></svg>
+          </a>
+          <a href="mailto:rpgoyals@yahoo.com" class="team-btn" title="Email">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="1" y="2.5" width="11" height="8" rx="1.5"/><path d="M1 4.5l5.5 3.5 5.5-3.5"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="team-person">
+        <div class="team-avatar">VG</div>
+        <div>
+          <div class="team-name">Vikas Goyal</div>
+          <div class="team-role">Partner & Chief Orchestrator</div>
+        </div>
+        <div class="team-actions">
+          <a href="tel:+919845743808" class="team-btn" title="Call">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M1.5 3a.75.75 0 01.75-.75h1.2a.5.5 0 01.47.34l.55 1.65a.5.5 0 01-.12.51l-.63.63a5 5 0 001.9 1.9l.63-.63a.5.5 0 01.51-.12l1.65.55a.5.5 0 01.34.47V9A.75.75 0 019 9.75C4.72 9.75 1.5 6.53 1.5 3z"/></svg>
+          </a>
+          <a href="mailto:vikas@thegoyalgroup.com" class="team-btn" title="Email">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="1" y="2.5" width="11" height="8" rx="1.5"/><path d="M1 4.5l5.5 3.5 5.5-3.5"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="team-person">
+        <div class="team-avatar">GG</div>
+        <div>
+          <div class="team-name">Gopal Gupta</div>
+          <div class="team-role">Manager</div>
+        </div>
+        <div class="team-actions">
+          <a href="tel:+919066048777" class="team-btn" title="Call">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M1.5 3a.75.75 0 01.75-.75h1.2a.5.5 0 01.47.34l.55 1.65a.5.5 0 01-.12.51l-.63.63a5 5 0 001.9 1.9l.63-.63a.5.5 0 01.51-.12l1.65.55a.5.5 0 01.34.47V9A.75.75 0 019 9.75C4.72 9.75 1.5 6.53 1.5 3z"/></svg>
+          </a>
+          <a href="mailto:gopalrgupta@gmail.com" class="team-btn" title="Email">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="1" y="2.5" width="11" height="8" rx="1.5"/><path d="M1 4.5l5.5 3.5 5.5-3.5"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Social -->
+    <div class="social-card fade-in">
+      <div class="social-card-heading">Follow Goyal Group</div>
+      <div class="social-card-sub">Stay updated with our latest projects, news and milestones.</div>
+      <div class="social-icons">
+        <a href="#" class="social-btn" title="LinkedIn">in</a>
+        <a href="#" class="social-btn" title="Twitter/X">𝕏</a>
+        <a href="#" class="social-btn" title="Instagram">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="2" y="2" width="12" height="12" rx="3"/><circle cx="8" cy="8" r="3"/><circle cx="11.5" cy="4.5" r="0.7" fill="currentColor"/></svg>
+        </a>
+        <a href="#" class="social-btn" title="YouTube">▶</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MAP SECTION -->
+<section class="map-section">
+  <div class="map-inner">
+    <div class="map-header">
+      <div>
+        <h2 class="map-heading">Find Us <span>Across India</span></h2>
+        <p class="map-sub">Headquartered in Bengaluru with a growing Pan-India presence.</p>
+      </div>
+    </div>
+
+    <div class="map-offices">
+      <div class="office-card active" onclick="selectOffice(this)">
+        <div class="office-type">Head Office</div>
+        <div class="office-name">Bengaluru HQ</div>
+        <div class="office-address">Bengaluru, Karnataka — Primary operations, construction B2B, real estate & e-commerce hub.</div>
+      </div>
+      <div class="office-card" onclick="selectOffice(this)">
+        <div class="office-type">Warehouse</div>
+        <div class="office-name">Bengaluru Warehouse</div>
+        <div class="office-address">2L+ sq. ft. storage facility for construction materials, automotive parts and general cargo.</div>
+      </div>
+      <div class="office-card" onclick="selectOffice(this)">
+        <div class="office-type">Sales Office</div>
+        <div class="office-name">Bengaluru Sales</div>
+        <div class="office-address">Dedicated B2B sales office serving Prestige Group, Brigade Group and 50+ builder clients.</div>
+      </div>
+    </div>
+
+    <!-- Stylised India map -->
+    <div class="map-container">
+      <div class="map-grid-lines"></div>
+      <svg width="100%" height="100%" viewBox="0 0 900 300" preserveAspectRatio="xMidYMid meet">
+        <!-- Simplified India silhouette paths (schematic) -->
+        <path class="india-outline" d="M400,30 L440,28 L480,40 L510,55 L530,80 L540,110 L535,140 L520,165 L510,190 L505,220 L510,250 L490,270 L470,265 L450,240 L440,210 L430,190 L420,170 L410,155 L400,140 L385,125 L370,110 L360,90 L355,65 L365,45 Z" fill="rgba(201,168,76,0.25)" stroke="rgba(201,168,76,0.4)" stroke-width="1.5"/>
+        <!-- Bengaluru pin -->
+        <g transform="translate(450,190)">
+          <circle r="8" fill="#C9A84C" opacity="0.3"/>
+          <circle r="8" fill="none" stroke="#C9A84C" stroke-width="1.5" opacity="0.5">
+            <animate attributeName="r" from="8" to="18" dur="2s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" from="0.5" to="0" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          <circle r="5" fill="#C9A84C"/>
+          <rect x="-38" y="-28" width="76" height="20" rx="10" fill="rgba(13,27,42,0.9)"/>
+          <text x="0" y="-14" text-anchor="middle" font-family="Sora,sans-serif" font-weight="700" font-size="9" fill="#C9A84C">BENGALURU HQ</text>
+        </g>
+        <!-- Mumbai dot -->
+        <g transform="translate(390,155)">
+          <circle r="4" fill="rgba(201,168,76,0.5)"/>
+          <rect x="-22" y="-20" width="44" height="16" rx="8" fill="rgba(13,27,42,0.75)"/>
+          <text x="0" y="-9" text-anchor="middle" font-family="Sora,sans-serif" font-weight="600" font-size="7.5" fill="rgba(201,168,76,0.7)">MUMBAI</text>
+        </g>
+        <!-- Delhi dot -->
+        <g transform="translate(430,75)">
+          <circle r="4" fill="rgba(201,168,76,0.5)"/>
+          <rect x="-18" y="-20" width="36" height="16" rx="8" fill="rgba(13,27,42,0.75)"/>
+          <text x="0" y="-9" text-anchor="middle" font-family="Sora,sans-serif" font-weight="600" font-size="7.5" fill="rgba(201,168,76,0.7)">DELHI</text>
+        </g>
+        <!-- Chennai dot -->
+        <g transform="translate(462,230)">
+          <circle r="3.5" fill="rgba(201,168,76,0.45)"/>
+          <rect x="-22" y="-18" width="44" height="14" rx="7" fill="rgba(13,27,42,0.7)"/>
+          <text x="0" y="-8" text-anchor="middle" font-family="Sora,sans-serif" font-weight="600" font-size="7" fill="rgba(201,168,76,0.65)">CHENNAI</text>
+        </g>
+        <!-- Caption -->
+        <text x="220" y="150" font-family="Sora,sans-serif" font-weight="700" font-size="11" fill="rgba(201,168,76,0.2)" letter-spacing="3">PAN INDIA NETWORK</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ SECTION -->
+<section class="faq-section">
+  <div class="faq-inner">
+    <div class="faq-header">
+      <div class="page-hero-tag" style="margin:0 auto 18px;background:rgba(201,168,76,0.1);border-color:rgba(201,168,76,0.25);">FAQs</div>
+      <h2 class="faq-heading">Frequently Asked <span>Questions</span></h2>
+      <p class="faq-sub">Quick answers to things our partners and clients most often ask about working with Goyal Group.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">What types of construction materials does Goyal Group supply?</span>
+          <div class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 6h8M6 2v8"/></svg></div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">We supply the full spectrum — cement (UltraTech, ACC, Ambuja), tiles & flooring, bathroom fittings (Jaquar, Kohler), CPVC/PVC pipes (Astral, Supreme), sanitary ware, adhesives, grouts, steel, TMT bars and much more. We are a single-source B2B partner for all your construction material needs.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Do you offer bulk pricing for large construction projects?</span>
+          <div class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 6h8M6 2v8"/></svg></div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">Absolutely. Goyal Group specialises in high-volume B2B supply. We offer structured volume pricing, credit terms, and dedicated account management for developers, contractors and EPC companies. Please reach out via the form above or call Vikas Goyal directly for a tailored quote.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Which cities and states does Goyal Group operate in?</span>
+          <div class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 6h8M6 2v8"/></svg></div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">Our headquarters and primary operations are in Bengaluru, Karnataka. Through our distribution and logistics network, we serve clients across 200+ locations Pan-India, with particular strength in South India — Karnataka, Tamil Nadu, Andhra Pradesh and Telangana.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">How can I become a distribution partner or dealer?</span>
+          <div class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 6h8M6 2v8"/></svg></div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">We are always looking for reliable distribution and dealership partners who share our commitment to quality and customer service. Select "Partnership" in the inquiry form above, fill in your details, and our business development team will get in touch to discuss terms, territories and requirements.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">What is the typical lead time for bulk material orders?</span>
+          <div class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 6h8M6 2v8"/></svg></div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">With our 2 lakh+ sq. ft. warehouse and deep supplier relationships, most in-stock items are available for same-day or next-day dispatch within the Bengaluru region. For out-of-stock or customised orders, lead times typically range from 3–7 business days depending on the product category and volume.</div></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Are there career opportunities at Goyal Group?</span>
+          <div class="faq-icon"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 6h8M6 2v8"/></svg></div>
+        </div>
+        <div class="faq-a"><div class="faq-a-inner">Yes! With 25,000+ people across our group and rapid expansion across five sectors, we regularly hire in sales, logistics, operations, tech, finance and management. Send your CV and a brief note to vikas@thegoyalgroup.com with the subject line "Career Opportunity" and our HR team will review it.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <svg width="30" height="30" viewBox="0 0 44 44" fill="none"><polygon points="22,6 36.5,14 36.5,30 22,38 7.5,30 7.5,14" fill="url(#hgf)"/><defs><linearGradient id="hgf" x1="7.5" y1="6" x2="36.5" y2="38" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#E8C97A"/><stop offset="100%" stop-color="#B8872C"/></linearGradient></defs><text x="22" y="27" text-anchor="middle" font-family="Sora,sans-serif" font-weight="800" font-size="15" fill="#0D1B2A">G</text></svg>
+      <span style="font-family:'Sora',sans-serif;font-weight:700;font-size:0.85rem;color:rgba(255,255,255,0.45);letter-spacing:0.08em;">GOYAL GROUP</span>
+    </div>
+    <p class="footer-copy">© 2025 Goyal Group. All rights reserved. Building Today. Enriching Tomorrow.</p>
+    <div class="footer-links">
+      <a href="goyal-group-homepage.html">← Home</a>
+      <a href="goyal-group-businesses.html">Businesses</a>
+      <a href="#">Privacy</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Purpose tab selector
+  function selectTab(el) {
+    document.querySelectorAll('.purpose-tab').forEach(t => t.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  // Office selector
+  function selectOffice(el) {
+    document.querySelectorAll('.office-card').forEach(c => c.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  // FAQ accordion
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // Form submit
+  function submitForm() {
+    const firstName = document.getElementById('firstName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    if (!firstName || !email || !phone || !message) {
+      // Shake effect on empty required fields
+      [['firstName', firstName], ['email', email], ['phone', phone], ['message', message]].forEach(([id, val]) => {
+        if (!val) {
+          const el = document.getElementById(id);
+          el.style.borderColor = '#EF4444';
+          el.style.animation = 'shake 0.4s ease';
+          setTimeout(() => { el.style.animation = ''; el.style.borderColor = ''; }, 700);
+        }
+      });
+      return;
+    }
+
+    // Show success
+    document.getElementById('formContent').style.display = 'none';
+    document.getElementById('successOverlay').classList.add('show');
+  }
+
+  function resetForm() {
+    document.getElementById('formContent').style.display = 'block';
+    document.getElementById('successOverlay').classList.remove('show');
+    ['firstName','lastName','email','phone','company','message'].forEach(id => {
+      document.getElementById(id).value = '';
+    });
+    document.getElementById('bizType').selectedIndex = 0;
+  }
+
+  // Scroll fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach((el, i) => {
+    el.style.transitionDelay = (i * 0.08) + 's';
+    observer.observe(el);
+  });
+
+  // Shake keyframe
+  const style = document.createElement('style');
+  style.textContent = '@keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }';
+  document.head.appendChild(style);
+</script>
+</body>
+</html>

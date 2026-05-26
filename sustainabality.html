@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sustainability — Goyal Group</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-dim: rgba(201,168,76,0.13);
+    --navy: #0D1B2A;
+    --white: #FFFFFF;
+    --grey-bg: #F5F6F8;
+    --grey-text: #6B7280;
+    --border: #E4E7EC;
+    --green: #16A34A;
+    --green-light: #22C55E;
+    --green-dim: rgba(22,163,74,0.12);
+    --green-mid: #15803D;
+    --teal: #0D9488;
+    --teal-dim: rgba(13,148,136,0.12);
+    --blue: #2563EB;
+    --blue-dim: rgba(37,99,235,0.1);
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--grey-bg); color: var(--navy); overflow-x: hidden; }
+
+  /* ── NAVBAR ── */
+  .navbar-wrapper { position: fixed; top: 16px; left: 50%; transform: translateX(-50%); width: calc(100% - 48px); max-width: 1240px; z-index: 200; }
+  .navbar { background: var(--white); border-radius: 50px; padding: 12px 22px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 4px 32px rgba(13,27,42,0.12); }
+  .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+  .logo-hex { width: 42px; height: 42px; }
+  .logo-text .goyal { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.1rem; color: var(--navy); letter-spacing: 0.08em; display: block; }
+  .logo-text .group { font-family: 'Sora', sans-serif; font-weight: 600; font-size: 0.58rem; color: var(--gold); letter-spacing: 0.22em; text-transform: uppercase; display: block; margin-top: 1px; }
+  .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+  .nav-links a { font-size: 0.8rem; font-weight: 500; color: #374151; text-decoration: none; padding: 6px 10px; border-radius: 20px; white-space: nowrap; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-links .active { color: var(--navy); font-weight: 700; position: relative; }
+  .nav-links .active::after { content: ''; position: absolute; bottom: 2px; left: 10px; right: 10px; height: 2px; background: var(--green); border-radius: 2px; }
+  .nav-cta { background: var(--navy); color: var(--white); padding: 10px 20px; border-radius: 50px; font-weight: 700; font-size: 0.8rem; display: flex; align-items: center; gap: 6px; flex-shrink: 0; text-decoration: none; transition: background 0.2s, transform 0.2s; }
+  .nav-cta:hover { background: #1a2f47; transform: translateY(-1px); }
+  @media (max-width: 900px) { .nav-links { display: none; } }
+
+  /* ── HERO ── */
+  .page-hero { background: linear-gradient(160deg, #042f1a 0%, #0a2e1a 40%, var(--navy) 100%); padding: 140px 24px 110px; position: relative; overflow: hidden; min-height: 660px; display: flex; align-items: center; }
+  .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(22,163,74,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(22,163,74,0.04) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; }
+  .hero-glow-green { position: absolute; top: -150px; right: -80px; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(22,163,74,0.1) 0%, transparent 65%); pointer-events: none; }
+  .hero-glow-gold { position: absolute; bottom: -100px; left: -60px; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 65%); pointer-events: none; }
+
+  /* floating leaf particles */
+  .leaf { position: absolute; opacity: 0.07; pointer-events: none; }
+
+  .page-hero-inner { max-width: 1240px; margin: 0 auto; position: relative; z-index: 1; display: grid; grid-template-columns: 1.1fr 1fr; gap: 80px; align-items: center; width: 100%; }
+  @media (max-width: 860px) { .page-hero-inner { grid-template-columns: 1fr; gap: 44px; } }
+
+  .breadcrumb { display: flex; align-items: center; gap: 8px; margin-bottom: 22px; }
+  .breadcrumb a { font-size: 0.78rem; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--green-light); }
+  .breadcrumb-sep { color: rgba(255,255,255,0.22); }
+  .breadcrumb span { font-size: 0.78rem; color: var(--green-light); font-weight: 600; }
+
+  .section-pill { display: inline-flex; align-items: center; gap: 8px; border-radius: 50px; padding: 6px 14px; font-size: 0.74rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 20px; }
+  .pill-green { background: var(--green-dim); border: 1px solid rgba(22,163,74,0.3); color: var(--green-light); }
+  .pill-green::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green-light); }
+  .pill-gold { background: var(--gold-dim); border: 1px solid rgba(201,168,76,0.3); color: var(--gold); }
+  .pill-gold::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+
+  .hero-heading { font-family: 'Sora', sans-serif; font-weight: 800; font-size: clamp(2.4rem, 4.5vw, 3.8rem); color: var(--white); line-height: 1.07; margin-bottom: 22px; }
+  .hero-heading span.green { color: #4ADE80; }
+  .hero-heading span.gold { color: var(--gold); }
+  .hero-body { font-size: 1rem; line-height: 1.78; color: rgba(255,255,255,0.6); margin-bottom: 36px; max-width: 500px; }
+
+  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-green { display: inline-flex; align-items: center; gap: 8px; background: var(--green); color: var(--white); padding: 13px 26px; border-radius: 50px; font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.88rem; text-decoration: none; transition: background 0.2s, transform 0.2s; }
+  .btn-green:hover { background: var(--green-mid); transform: translateY(-2px); }
+  .btn-ghost { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--white); padding: 13px 26px; border-radius: 50px; border: 1.5px solid rgba(255,255,255,0.2); font-family: 'Sora', sans-serif; font-weight: 600; font-size: 0.88rem; text-decoration: none; transition: border-color 0.2s, color 0.2s, transform 0.2s; }
+  .btn-ghost:hover { border-color: #4ADE80; color: #4ADE80; transform: translateY(-2px); }
+
+  /* Hero right — pledge cards */
+  .pledge-stack { display: flex; flex-direction: column; gap: 14px; }
+  .pledge-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.09); border-radius: 18px; padding: 18px 22px; display: flex; align-items: center; gap: 16px; transition: border-color 0.2s, background 0.2s; }
+  .pledge-card:hover { border-color: rgba(22,163,74,0.45); background: rgba(22,163,74,0.06); }
+  .pledge-icon { width: 46px; height: 46px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .pledge-label { font-size: 0.68rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+  .pledge-value { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1rem; color: var(--white); line-height: 1.2; }
+  .pledge-badge { margin-left: auto; border-radius: 50px; padding: 4px 10px; font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.7rem; flex-shrink: 0; }
+  .pb-green { background: rgba(22,163,74,0.2); color: #4ADE80; }
+  .pb-teal { background: rgba(13,148,136,0.2); color: #2DD4BF; }
+  .pb-gold { background: var(--gold-dim); color: var(--gold); }
+  .pb-blue { background: rgba(37,99,235,0.15); color: #60A5FA; }
+
+  /* ── IMPACT BAR ── */
+  .impact-bar { background: var(--green); }
+  .impact-bar-inner { max-width: 1240px; margin: 0 auto; padding: 0 24px; display: grid; grid-template-columns: repeat(5, 1fr); }
+  @media (max-width: 900px) { .impact-bar-inner { grid-template-columns: repeat(2, 1fr); } }
+  .impact-cell { padding: 26px 20px; border-right: 1px solid rgba(255,255,255,0.15); display: flex; flex-direction: column; gap: 4px; }
+  .impact-cell:last-child { border-right: none; }
+  .impact-num { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.7rem; color: var(--white); line-height: 1; }
+  .impact-label { font-size: 0.72rem; color: rgba(255,255,255,0.75); font-weight: 500; }
+
+  /* ── COMMITMENT SECTION ── */
+  .commit-section { background: var(--white); padding: 100px 24px; }
+  .commit-inner { max-width: 1240px; margin: 0 auto; }
+  .commit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  @media (max-width: 860px) { .commit-grid { grid-template-columns: 1fr; gap: 48px; } }
+
+  .commit-heading { font-family: 'Sora', sans-serif; font-weight: 800; font-size: clamp(2rem, 3.5vw, 2.8rem); color: var(--navy); line-height: 1.1; margin-bottom: 20px; }
+  .commit-heading span { color: var(--green); }
+  .commit-body { font-size: 0.95rem; color: var(--grey-text); line-height: 1.8; margin-bottom: 28px; }
+  .commit-quote { border-left: 3px solid var(--green); padding: 16px 22px; background: var(--green-dim); border-radius: 0 12px 12px 0; margin-bottom: 28px; }
+  .commit-quote-text { font-family: 'Sora', sans-serif; font-style: italic; font-weight: 600; font-size: 0.95rem; color: var(--navy); line-height: 1.65; }
+  .commit-quote-attr { font-size: 0.75rem; color: var(--green); font-weight: 700; margin-top: 8px; }
+
+  /* SDG pills */
+  .sdg-row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .sdg-pill { display: flex; align-items: center; gap: 6px; border-radius: 50px; padding: 6px 14px; font-size: 0.75rem; font-weight: 700; border: 1.5px solid; }
+
+  /* Visual: leaf/tree SVG illustration */
+  .commit-visual { display: flex; align-items: center; justify-content: center; }
+  .commit-visual-wrap { width: 100%; aspect-ratio: 1; max-width: 420px; background: linear-gradient(135deg, #042f1a 0%, #0a4a28 100%); border-radius: 28px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  .commit-visual-wrap::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(22,163,74,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(22,163,74,0.06) 1px, transparent 1px); background-size: 32px 32px; }
+
+  /* ── PILLARS SECTION ── */
+  .pillars-section { background: var(--grey-bg); padding: 100px 24px; }
+  .pillars-inner { max-width: 1240px; margin: 0 auto; }
+  .section-heading { font-family: 'Sora', sans-serif; font-weight: 800; font-size: clamp(2rem, 3.5vw, 2.8rem); color: var(--navy); line-height: 1.1; margin-bottom: 12px; }
+  .section-heading span.green { color: var(--green); }
+  .section-heading span.gold { color: var(--gold); }
+  .section-sub { font-size: 0.95rem; color: var(--grey-text); line-height: 1.65; max-width: 520px; margin-bottom: 56px; }
+
+  /* 3 pillar cards: Environment, Social, Governance */
+  .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  @media (max-width: 860px) { .pillars-grid { grid-template-columns: 1fr; } }
+
+  .pillar-card { border-radius: 24px; overflow: hidden; }
+  .pillar-header { padding: 36px 32px 28px; }
+  .pillar-tag { display: inline-flex; align-items: center; gap: 7px; border-radius: 50px; padding: 5px 12px; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; margin-bottom: 18px; }
+  .pillar-icon { width: 56px; height: 56px; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
+  .pillar-title { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.5rem; margin-bottom: 10px; }
+  .pillar-desc { font-size: 0.88rem; line-height: 1.72; }
+  .pillar-body { padding: 0 32px 32px; display: flex; flex-direction: column; gap: 10px; }
+  .pillar-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; border-radius: 12px; }
+  .pi-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+  .pi-title { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.85rem; margin-bottom: 3px; }
+  .pi-desc { font-size: 0.78rem; line-height: 1.55; }
+
+  /* E card */
+  .pillar-e { background: linear-gradient(160deg, #042f1a 0%, #0a3d20 100%); }
+  .pillar-e .pillar-tag { background: rgba(22,163,74,0.2); border: 1px solid rgba(22,163,74,0.35); color: #4ADE80; }
+  .pillar-e .pillar-icon { background: rgba(22,163,74,0.18); border: 1px solid rgba(22,163,74,0.3); color: #4ADE80; }
+  .pillar-e .pillar-title { color: var(--white); }
+  .pillar-e .pillar-desc { color: rgba(255,255,255,0.6); }
+  .pillar-e .pillar-item { background: rgba(22,163,74,0.08); border: 1px solid rgba(22,163,74,0.15); }
+  .pillar-e .pi-dot { background: #4ADE80; }
+  .pillar-e .pi-title { color: var(--white); }
+  .pillar-e .pi-desc { color: rgba(255,255,255,0.5); }
+
+  /* S card */
+  .pillar-s { background: var(--white); border: 1.5px solid var(--border); }
+  .pillar-s .pillar-tag { background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.3); color: var(--gold); }
+  .pillar-s .pillar-icon { background: var(--gold-dim); border: 1px solid rgba(201,168,76,0.25); color: var(--gold); }
+  .pillar-s .pillar-title { color: var(--navy); }
+  .pillar-s .pillar-desc { color: var(--grey-text); }
+  .pillar-s .pillar-item { background: var(--grey-bg); border: 1px solid var(--border); }
+  .pillar-s .pi-dot { background: var(--gold); }
+  .pillar-s .pi-title { color: var(--navy); }
+  .pillar-s .pi-desc { color: var(--grey-text); }
+
+  /* G card */
+  .pillar-g { background: linear-gradient(160deg, #0a1825 0%, var(--navy) 100%); }
+  .pillar-g .pillar-tag { background: rgba(37,99,235,0.15); border: 1px solid rgba(37,99,235,0.3); color: #60A5FA; }
+  .pillar-g .pillar-icon { background: rgba(37,99,235,0.12); border: 1px solid rgba(37,99,235,0.25); color: #60A5FA; }
+  .pillar-g .pillar-title { color: var(--white); }
+  .pillar-g .pillar-desc { color: rgba(255,255,255,0.6); }
+  .pillar-g .pillar-item { background: rgba(37,99,235,0.06); border: 1px solid rgba(37,99,235,0.15); }
+  .pillar-g .pi-dot { background: #60A5FA; }
+  .pillar-g .pi-title { color: var(--white); }
+  .pillar-g .pi-desc { color: rgba(255,255,255,0.5); }
+
+  /* ── INITIATIVES SECTION ── */
+  .initiatives-section { background: var(--white); padding: 100px 24px; }
+  .initiatives-inner { max-width: 1240px; margin: 0 auto; }
+  .init-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 56px; }
+  @media (max-width: 760px) { .init-grid { grid-template-columns: 1fr; } }
+
+  .init-card { border-radius: 20px; padding: 32px 28px; border: 1.5px solid var(--border); background: var(--white); transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s; position: relative; overflow: hidden; }
+  .init-card:hover { transform: translateY(-5px); box-shadow: 0 16px 48px rgba(13,27,42,0.09); border-color: rgba(22,163,74,0.35); }
+  .init-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+  .init-card:hover::before { transform: scaleX(1); }
+  .ic-green::before { background: linear-gradient(90deg, var(--green), var(--green-light)); }
+  .ic-gold::before { background: linear-gradient(90deg, var(--gold), var(--gold-light)); }
+  .ic-teal::before { background: linear-gradient(90deg, var(--teal), #2DD4BF); }
+  .ic-blue::before { background: linear-gradient(90deg, var(--blue), #60A5FA); }
+
+  .init-num { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 3.5rem; line-height: 1; margin-bottom: -10px; opacity: 0.07; }
+  .ic-green .init-num { color: var(--green); }
+  .ic-gold .init-num { color: var(--gold); }
+  .ic-teal .init-num { color: var(--teal); }
+  .ic-blue .init-num { color: var(--blue); }
+
+  .init-icon { width: 50px; height: 50px; border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+  .ic-green .init-icon { background: var(--green-dim); border: 1px solid rgba(22,163,74,0.25); color: var(--green); }
+  .ic-gold .init-icon { background: var(--gold-dim); border: 1px solid rgba(201,168,76,0.25); color: var(--gold); }
+  .ic-teal .init-icon { background: var(--teal-dim); border: 1px solid rgba(13,148,136,0.25); color: var(--teal); }
+  .ic-blue .init-icon { background: var(--blue-dim); border: 1px solid rgba(37,99,235,0.2); color: var(--blue); }
+
+  .init-title { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.1rem; color: var(--navy); margin-bottom: 10px; }
+  .init-desc { font-size: 0.87rem; color: var(--grey-text); line-height: 1.75; margin-bottom: 20px; }
+  .init-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+  .init-tag { font-size: 0.72rem; font-weight: 600; border-radius: 50px; padding: 4px 11px; }
+  .ic-green .init-tag { background: var(--green-dim); color: var(--green); }
+  .ic-gold .init-tag { background: var(--gold-dim); color: #92650a; }
+  .ic-teal .init-tag { background: var(--teal-dim); color: var(--teal); }
+  .ic-blue .init-tag { background: var(--blue-dim); color: var(--blue); }
+
+  /* ── PROGRESS / TARGETS ── */
+  .targets-section { background: var(--navy); padding: 100px 24px; position: relative; overflow: hidden; }
+  .targets-bg-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(22,163,74,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(22,163,74,0.03) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; }
+  .targets-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 700px; height: 350px; background: radial-gradient(ellipse, rgba(22,163,74,0.06) 0%, transparent 70%); pointer-events: none; }
+  .targets-inner { max-width: 1040px; margin: 0 auto; position: relative; z-index: 1; }
+  .targets-header { text-align: center; margin-bottom: 64px; }
+  .targets-heading { font-family: 'Sora', sans-serif; font-weight: 800; font-size: clamp(2rem, 3.5vw, 2.8rem); color: var(--white); line-height: 1.1; margin-bottom: 12px; }
+  .targets-heading span { color: #4ADE80; }
+  .targets-sub { font-size: 0.95rem; color: rgba(255,255,255,0.5); }
+
+  .targets-grid { display: flex; flex-direction: column; gap: 22px; }
+  .target-row { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 18px; padding: 24px 28px; transition: border-color 0.25s; }
+  .target-row:hover { border-color: rgba(22,163,74,0.35); }
+  .target-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; gap: 16px; flex-wrap: wrap; }
+  .target-left { display: flex; align-items: center; gap: 14px; }
+  .target-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .target-title { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.9rem; color: var(--white); margin-bottom: 3px; }
+  .target-sub { font-size: 0.72rem; color: rgba(255,255,255,0.45); }
+  .target-right { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
+  .target-pct { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.3rem; color: var(--white); }
+  .target-year { font-size: 0.72rem; color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.06); border-radius: 50px; padding: 3px 10px; }
+  .progress-track { width: 100%; height: 8px; background: rgba(255,255,255,0.08); border-radius: 50px; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 50px; transition: width 1.5s cubic-bezier(0.4,0,0.2,1); }
+  .pf-green { background: linear-gradient(90deg, #16A34A, #4ADE80); }
+  .pf-teal { background: linear-gradient(90deg, #0D9488, #2DD4BF); }
+  .pf-gold { background: linear-gradient(90deg, var(--gold), var(--gold-light)); }
+  .pf-blue { background: linear-gradient(90deg, #2563EB, #60A5FA); }
+  .pf-emerald { background: linear-gradient(90deg, #059669, #34D399); }
+
+  /* ── COMMUNITY SECTION ── */
+  .community-section { background: var(--grey-bg); padding: 100px 24px; }
+  .community-inner { max-width: 1240px; margin: 0 auto; }
+  .community-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; margin-top: 56px; }
+  @media (max-width: 860px) { .community-grid { grid-template-columns: 1fr; gap: 40px; } }
+
+  .community-cards { display: flex; flex-direction: column; gap: 16px; }
+  .community-card { background: var(--white); border: 1.5px solid var(--border); border-radius: 16px; padding: 20px 22px; display: flex; align-items: flex-start; gap: 16px; transition: border-color 0.2s, transform 0.25s; }
+  .community-card:hover { border-color: rgba(22,163,74,0.4); transform: translateX(4px); }
+  .cc-icon { width: 42px; height: 42px; border-radius: 11px; background: var(--green-dim); border: 1px solid rgba(22,163,74,0.25); display: flex; align-items: center; justify-content: center; color: var(--green); flex-shrink: 0; }
+  .cc-title { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.9rem; color: var(--navy); margin-bottom: 4px; }
+  .cc-desc { font-size: 0.8rem; color: var(--grey-text); line-height: 1.6; }
+  .cc-impact { display: inline-flex; align-items: center; gap: 5px; background: var(--green-dim); border-radius: 50px; padding: 3px 10px; font-size: 0.7rem; font-weight: 700; color: var(--green-mid); margin-top: 8px; }
+
+  /* Community stat visual */
+  .community-visual { background: linear-gradient(135deg, #042f1a 0%, #0a3d20 100%); border-radius: 28px; padding: 40px 36px; }
+  .cv-heading { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.15rem; color: var(--white); margin-bottom: 6px; }
+  .cv-sub { font-size: 0.82rem; color: rgba(255,255,255,0.5); margin-bottom: 28px; }
+  .cv-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .cv-stat { background: rgba(255,255,255,0.05); border: 1px solid rgba(22,163,74,0.2); border-radius: 14px; padding: 18px; text-align: center; }
+  .cv-stat-num { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.8rem; color: var(--white); line-height: 1; }
+  .cv-stat-num span { color: #4ADE80; }
+  .cv-stat-label { font-size: 0.72rem; color: rgba(255,255,255,0.45); margin-top: 5px; }
+
+  /* ── AWARDS SECTION ── */
+  .awards-section { background: var(--white); padding: 80px 24px; border-top: 1px solid var(--border); }
+  .awards-inner { max-width: 1240px; margin: 0 auto; }
+  .awards-label { text-align: center; font-size: 0.78rem; font-weight: 600; color: var(--grey-text); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 36px; }
+  .awards-row { display: flex; align-items: stretch; justify-content: center; gap: 20px; flex-wrap: wrap; }
+  .award-card { background: var(--grey-bg); border: 1.5px solid var(--border); border-radius: 16px; padding: 22px 24px; min-width: 180px; text-align: center; transition: border-color 0.2s, transform 0.2s; flex: 1; max-width: 220px; }
+  .award-card:hover { border-color: rgba(22,163,74,0.4); transform: translateY(-3px); }
+  .award-icon { font-size: 1.8rem; margin-bottom: 10px; }
+  .award-title { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.82rem; color: var(--navy); margin-bottom: 4px; line-height: 1.3; }
+  .award-year { font-size: 0.72rem; color: var(--green); font-weight: 600; }
+
+  /* ── CTA SECTION ── */
+  .cta-section { background: var(--grey-bg); padding: 80px 24px; }
+  .cta-inner { max-width: 900px; margin: 0 auto; background: linear-gradient(135deg, #042f1a 0%, #0a4a28 100%); border-radius: 28px; padding: 64px 60px; text-align: center; position: relative; overflow: hidden; }
+  .cta-inner::before { content: ''; position: absolute; top: -80px; right: -80px; width: 300px; height: 300px; border-radius: 50%; border: 60px solid rgba(22,163,74,0.1); }
+  .cta-inner::after { content: ''; position: absolute; bottom: -60px; left: -60px; width: 240px; height: 240px; border-radius: 50%; border: 50px solid rgba(201,168,76,0.07); }
+  .cta-heading { font-family: 'Sora', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 3.5vw, 2.6rem); color: var(--white); line-height: 1.1; margin-bottom: 14px; position: relative; z-index: 1; }
+  .cta-heading span { color: #4ADE80; }
+  .cta-body { font-size: 0.95rem; color: rgba(255,255,255,0.58); line-height: 1.72; margin-bottom: 36px; position: relative; z-index: 1; max-width: 520px; margin-left: auto; margin-right: auto; }
+  .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
+  .btn-gold { display: inline-flex; align-items: center; gap: 8px; background: var(--gold); color: var(--navy); padding: 13px 26px; border-radius: 50px; font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.88rem; text-decoration: none; transition: background 0.2s, transform 0.2s; }
+  .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+  @media (max-width: 600px) { .cta-inner { padding: 44px 28px; } }
+
+  /* ── FOOTER ── */
+  .footer { background: #060d15; padding: 36px 24px 24px; }
+  .footer-inner { max-width: 1240px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
+  .footer-copy { font-size: 0.77rem; color: rgba(255,255,255,0.3); }
+  .footer-links { display: flex; gap: 22px; }
+  .footer-links a { font-size: 0.77rem; color: rgba(255,255,255,0.38); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--green-light); }
+
+  /* ── ANIMATIONS ── */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar-wrapper">
+  <nav class="navbar">
+    <a href="goyal-group-homepage.html" class="logo">
+      <svg class="logo-hex" viewBox="0 0 44 44" fill="none">
+        <polygon points="22,6 36.5,14 36.5,30 22,38 7.5,30 7.5,14" fill="url(#hg)"/>
+        <defs><linearGradient id="hg" x1="7.5" y1="6" x2="36.5" y2="38" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#E8C97A"/><stop offset="100%" stop-color="#B8872C"/></linearGradient></defs>
+        <text x="22" y="27" text-anchor="middle" font-family="Sora,sans-serif" font-weight="800" font-size="15" fill="#0D1B2A">G</text>
+      </svg>
+      <div class="logo-text"><span class="goyal">GOYAL</span><span class="group">GROUP</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="business.html">Our Businesses</a></li>
+      <li><a href="sustainabality.html" class="active">Sustainability</a></li>
+      <li><a href="invest.html">Investors</a></li>
+      <li><a href="#">Careers</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+    <a href="contact.html" class="nav-cta">Get In Touch ↗</a>
+  </nav>
+</div>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow-green"></div>
+  <div class="hero-glow-gold"></div>
+
+  <!-- Decorative leaf SVGs -->
+  <svg class="leaf" style="top:12%;left:8%;width:80px;" viewBox="0 0 80 80" fill="none"><path d="M10 70 C10 70 40 10 70 10 C70 10 40 40 10 70Z" fill="#22C55E"/></svg>
+  <svg class="leaf" style="top:60%;right:6%;width:60px;transform:rotate(120deg);" viewBox="0 0 80 80" fill="none"><path d="M10 70 C10 70 40 10 70 10 C70 10 40 40 10 70Z" fill="#4ADE80"/></svg>
+  <svg class="leaf" style="bottom:15%;left:18%;width:45px;transform:rotate(200deg);" viewBox="0 0 80 80" fill="none"><path d="M10 70 C10 70 40 10 70 10 C70 10 40 40 10 70Z" fill="#16A34A"/></svg>
+
+  <div class="page-hero-inner">
+    <div>
+      <div class="breadcrumb">
+        <a href="goyal-group-homepage.html">Home</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>Sustainability</span>
+      </div>
+      <div class="section-pill pill-green">Sustainability</div>
+      <h1 class="hero-heading">Building India.<br><span class="green">Preserving</span><br>the <span class="gold">Planet.</span></h1>
+      <p class="hero-body">Goyal Group believes that business excellence and environmental stewardship are not opposing forces — they are complementary responsibilities. Our sustainability commitment is woven into every sector, every supply chain, and every partnership we hold.</p>
+      <div class="hero-btns">
+        <a href="#pillars" class="btn-green">Our ESG Pillars ↓</a>
+        <a href="#targets" class="btn-ghost">2030 Targets ↓</a>
+      </div>
+    </div>
+    <div class="pledge-stack">
+      <div class="pledge-card">
+        <div class="pledge-icon" style="background:rgba(22,163,74,0.15);border:1px solid rgba(22,163,74,0.25);">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#4ADE80" stroke-width="1.7" stroke-linecap="round"><path d="M11 2C7 6 4 10 4 14a7 7 0 0014 0c0-4-3-8-7-12z"/><path d="M11 22V14M8 17l3-3 3 3"/></svg>
+        </div>
+        <div>
+          <div class="pledge-label">Net Zero Commitment</div>
+          <div class="pledge-value">Carbon Neutral by 2035</div>
+        </div>
+        <div class="pledge-badge pb-green">Active</div>
+      </div>
+      <div class="pledge-card">
+        <div class="pledge-icon" style="background:rgba(13,148,136,0.15);border:1px solid rgba(13,148,136,0.25);">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#2DD4BF" stroke-width="1.7" stroke-linecap="round"><path d="M12 2a5 5 0 015 5c0 3.5-5 11-5 11S7 10.5 7 7a5 5 0 015-5z"/><circle cx="12" cy="7" r="2"/><path d="M3 20c2-3 5-4 9-4s7 1 9 4"/></svg>
+        </div>
+        <div>
+          <div class="pledge-label">Water Stewardship</div>
+          <div class="pledge-value">40% Reduction by 2030</div>
+        </div>
+        <div class="pledge-badge pb-teal">In Progress</div>
+      </div>
+      <div class="pledge-card">
+        <div class="pledge-icon" style="background:var(--gold-dim);border:1px solid rgba(201,168,76,0.25);">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#C9A84C" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="8" r="4"/><path d="M3 19c0-4.42 3.58-8 8-8s8 3.58 8 8"/><path d="M14 12l3 3-3 3"/></svg>
+        </div>
+        <div>
+          <div class="pledge-label">Community Employment</div>
+          <div class="pledge-value">25,000+ Livelihoods Supported</div>
+        </div>
+        <div class="pledge-badge pb-gold">Ongoing</div>
+      </div>
+      <div class="pledge-card">
+        <div class="pledge-icon" style="background:rgba(37,99,235,0.12);border:1px solid rgba(37,99,235,0.22);">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#60A5FA" stroke-width="1.7" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="12" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="12" width="7" height="7" rx="1.5"/><rect x="12" y="12" width="7" height="7" rx="1.5"/></svg>
+        </div>
+        <div>
+          <div class="pledge-label">Responsible Sourcing</div>
+          <div class="pledge-value">100% Verified Supply Chain</div>
+        </div>
+        <div class="pledge-badge pb-blue">2028 Target</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT BAR -->
+<div class="impact-bar">
+  <div class="impact-bar-inner">
+    <div class="impact-cell"><div class="impact-num">50K+</div><div class="impact-label">Trees Planted</div></div>
+    <div class="impact-cell"><div class="impact-num">30%</div><div class="impact-label">Renewable Energy in Ops</div></div>
+    <div class="impact-cell"><div class="impact-num">2L sq.ft</div><div class="impact-label">Green Warehouse</div></div>
+    <div class="impact-cell"><div class="impact-num">Zero</div><div class="impact-label">Landfill Waste Policy</div></div>
+    <div class="impact-cell"><div class="impact-num">8</div><div class="impact-label">UN SDGs Aligned</div></div>
+  </div>
+</div>
+
+<!-- OUR COMMITMENT -->
+<section class="commit-section">
+  <div class="commit-inner">
+    <div class="commit-grid">
+      <div class="reveal">
+        <div class="section-pill pill-green" style="margin-bottom:20px;">Our Philosophy</div>
+        <h2 class="commit-heading">Sustainability Isn't a<br><span>Programme — It's a Promise.</span></h2>
+        <p class="commit-body">At Goyal Group, sustainability is not a department or an annual report. It is the lens through which every business decision is made — from the suppliers we choose to the warehouses we build, from the communities we operate in to the materials we put into India's buildings.</p>
+        <p class="commit-body">We believe that every brick laid, every pipe installed, and every home delivered carries an obligation — to the people who will live in it, the communities around it, and the planet that supports us all.</p>
+        <div class="commit-quote">
+          <div class="commit-quote-text">"We are not just building structures. We are building a legacy — one that future generations will inherit. That responsibility guides everything we do."</div>
+          <div class="commit-quote-attr">— Vikas Goyal, Partner & Chief Orchestrator</div>
+        </div>
+        <div class="sdg-row">
+          <div class="sdg-pill" style="background:rgba(229,36,28,0.08);border-color:rgba(229,36,28,0.25);color:#C0392B;">SDG 1 — No Poverty</div>
+          <div class="sdg-pill" style="background:rgba(39,189,96,0.09);border-color:rgba(39,189,96,0.25);color:#1e8449;">SDG 8 — Decent Work</div>
+          <div class="sdg-pill" style="background:rgba(253,157,36,0.09);border-color:rgba(253,157,36,0.25);color:#b7770d;">SDG 11 — Sustainable Cities</div>
+          <div class="sdg-pill" style="background:rgba(48,162,209,0.09);border-color:rgba(48,162,209,0.25);color:#1a6e91;">SDG 13 — Climate Action</div>
+          <div class="sdg-pill" style="background:rgba(12,151,80,0.09);border-color:rgba(12,151,80,0.25);color:#0a7a42;">SDG 15 — Life on Land</div>
+          <div class="sdg-pill" style="background:rgba(25,72,107,0.09);border-color:rgba(25,72,107,0.25);color:#19486b;">SDG 17 — Partnerships</div>
+        </div>
+      </div>
+      <div class="commit-visual reveal">
+        <div class="commit-visual-wrap">
+          <svg width="280" height="280" viewBox="0 0 280 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Earth circle -->
+            <circle cx="140" cy="140" r="100" fill="rgba(22,163,74,0.08)" stroke="rgba(22,163,74,0.25)" stroke-width="1.5"/>
+            <circle cx="140" cy="140" r="78" fill="rgba(22,163,74,0.06)" stroke="rgba(22,163,74,0.2)" stroke-width="1"/>
+            <!-- Tree trunk -->
+            <rect x="134" y="160" width="12" height="50" rx="4" fill="#16A34A" opacity="0.6"/>
+            <!-- Tree canopy layers -->
+            <ellipse cx="140" cy="148" rx="36" ry="24" fill="#16A34A" opacity="0.5"/>
+            <ellipse cx="140" cy="130" rx="28" ry="20" fill="#16A34A" opacity="0.65"/>
+            <ellipse cx="140" cy="112" rx="20" ry="16" fill="#22C55E" opacity="0.75"/>
+            <ellipse cx="140" cy="96" rx="14" ry="12" fill="#4ADE80" opacity="0.8"/>
+            <!-- Roots -->
+            <path d="M134 210 Q120 225 105 220" stroke="#16A34A" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+            <path d="M146 210 Q160 225 175 220" stroke="#16A34A" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+            <path d="M140 210 Q140 228 140 235" stroke="#16A34A" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+            <!-- Sun -->
+            <circle cx="200" cy="72" r="18" fill="#C9A84C" opacity="0.35"/>
+            <circle cx="200" cy="72" r="12" fill="#E8C97A" opacity="0.5"/>
+            <line x1="200" y1="48" x2="200" y2="42" stroke="#C9A84C" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+            <line x1="218" y1="54" x2="222" y2="50" stroke="#C9A84C" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+            <line x1="224" y1="72" x2="230" y2="72" stroke="#C9A84C" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+            <!-- Solar panel -->
+            <rect x="60" y="190" width="40" height="28" rx="3" fill="rgba(37,99,235,0.25)" stroke="#3B82F6" stroke-width="1" opacity="0.7"/>
+            <line x1="60" y1="204" x2="100" y2="204" stroke="#3B82F6" stroke-width="0.8" opacity="0.5"/>
+            <line x1="80" y1="190" x2="80" y2="218" stroke="#3B82F6" stroke-width="0.8" opacity="0.5"/>
+            <!-- Wind turbine -->
+            <line x1="210" y1="200" x2="210" y2="160" stroke="#4ADE80" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+            <ellipse cx="210" cy="160" rx="2" ry="2" fill="#4ADE80" opacity="0.7"/>
+            <path d="M210 160 Q220 148 214 140" stroke="#4ADE80" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+            <path d="M210 160 Q198 148 204 140" stroke="#4ADE80" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+            <path d="M210 160 Q218 172 224 168" stroke="#4ADE80" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+            <!-- Recycling arrows -->
+            <path d="M70 140 Q60 120 80 110 Q100 100 110 120" stroke="#2DD4BF" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.5"/>
+            <polygon points="112,115 112,125 104,120" fill="#2DD4BF" opacity="0.5"/>
+            <!-- G badge -->
+            <circle cx="140" cy="140" r="20" fill="rgba(201,168,76,0.15)" stroke="#C9A84C" stroke-width="1.5" opacity="0.7"/>
+            <text x="140" y="147" text-anchor="middle" font-family="Sora,sans-serif" font-weight="800" font-size="18" fill="#C9A84C" opacity="0.9">G</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ESG PILLARS -->
+<section class="pillars-section" id="pillars">
+  <div class="pillars-inner">
+    <div class="section-header reveal">
+      <div class="section-pill pill-green" style="margin-bottom:18px;">ESG Framework</div>
+      <h2 class="section-heading">Our Three <span class="green">ESG Pillars</span></h2>
+      <p class="section-sub">Environment, Social, and Governance — the three dimensions through which we measure, manage, and report our sustainability impact across all five business verticals.</p>
+    </div>
+    <div class="pillars-grid">
+      <!-- ENVIRONMENT -->
+      <div class="pillar-card pillar-e reveal">
+        <div class="pillar-header">
+          <div class="pillar-tag">🌿 Environment</div>
+          <div class="pillar-icon">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M13 2C9 7 5 12 5 17a8 8 0 0016 0c0-5-4-10-8-15z"/><path d="M13 26V18M10 21l3-3 3 3"/></svg>
+          </div>
+          <div class="pillar-title">Environmental<br>Stewardship</div>
+          <div class="pillar-desc">Reducing our ecological footprint across operations, logistics, and supply chains while actively restoring natural ecosystems.</div>
+        </div>
+        <div class="pillar-body">
+          <div class="pillar-item">
+            <div class="pi-dot"></div>
+            <div><div class="pi-title">Carbon Footprint Reduction</div><div class="pi-desc">30% emissions cut by 2028 across all warehouse and logistics operations through fuel switching and route optimisation.</div></div>
+          </div>
+          <div class="pillar-item">
+            <div class="pi-dot"></div>
+            <div><div class="pi-title">Renewable Energy Transition</div><div class="pi-desc">Solar panels installed across warehouses; targeting 60% renewable energy in operations by 2030.</div></div>
+          </div>
+          <div class="pillar-item">
+            <div class="pi-dot"></div>
+            <div><div class="pi-title">Zero Waste to Landfill</div><div class="pi-desc">Packaging redesign, material recovery, and construction waste recycling programmes across all verticals.</div></div>
+          </div>
+          <div class="pillar-item">
+            <div class="pi-dot"></div>
+            <div><div class="pi-title">Green Building Procurement</div><div class="pi-desc">Prioritising eco-certified products — low-VOC paints, recycled-content tiles, and water-efficient fittings — in our B2B catalogue.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SOCIAL -->
+      <div class="pillar-card pillar-s reveal">
+        <div class="pillar-header">
+          <div class="pillar-tag">🤝 Social</div>
+          <div class="pillar-icon">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="10" cy="8" r="4"/><circle cx="18" cy="8" r="4"/><path d="M2 22c0-4.42 3.58-8 8-8M16 14c4.42 0 8 3.58 8 8"/></svg>
+          </div>
+          <div class="pillar-title">Social<br>Responsibility</div>
+          <div class="pillar-desc">Creating dignified livelihoods, investing in communities, and building an inclusive workplace across 25,000+ team members.</div>
+        </div>
+        <div class="pillar-body">
+          <div class="pillar-item">
+            <div class="pi-dot"></div>
+            <div><div class="pi-title">Livelihood Creation</div><div class="pi-desc">25,000+ direct and indirect jobs sustained across five sectors, with a focus on employing local talent in every market we enter.</div></div>
+          </div>
+          <div class="pillar-item">
+            <div class="pi-dot"></div>
+            <div><div class="pi-title">Skill Development</div><div class="pi-desc">Vocational training programmes for warehouse staff, logistics teams, and construction trade workers — partnering with ITIs and NGOs.</div></div>
+          </div>
+          <div class="pillar-item">
+            <div class="pi-dot"></div>
+            <div><div class="pi-title">Women in Workforce</div><div class="pi-desc">Active targets to increase female participation in management, sales, and operations roles across all group companies by 2027.</div></div>
+          </div>
+          <div class="pillar-item">
+            <div class="pi-dot"></div>
+            <div><div class="pi-title">Community Investment</div><div class="pi-desc">Education, healthcare, and clean water initiatives in communities surrounding our Bengaluru operations — reaching 10,000+ beneficiaries.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GOVERNANCE -->
+      <div class="pillar-card pillar-g reveal">
+        <div class="pillar-header">
+          <div class="pillar-tag">⚖️ Governance</div>
+          <div class="pillar-icon">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="3" y="10" width="20" height="14" rx="3"/><path d="M8 10V7a5 5 0 0110 0v3"/><circle cx="13" cy="17" r="2"/></svg>
+          </div>
+          <div class="pillar-title">Responsible<br>Governance</div>
+          <div class="pillar-desc">Operating with transparency, integrity, and accountability — building trust with clients, partners, investors, and communities.</div>
+        </div>
+        <div class="pillar-body">
+          <div class="pillar-item">
+            <div class="pi-dot"></div>
+            <div><div class="pi-title">Ethical Supply Chain</div><div class="pi-desc">100% supplier code of conduct compliance target by 2028. No child labour, forced labour, or unsafe working conditions tolerated in our supply network.</div></div>
+          </div>
+          <div class="pillar-item">
+            <div class="pi-dot"></div>
+            <div><div class="pi-title">Financial Transparency</div><div class="pi-desc">Annual sustainability reporting aligned with GRI standards, providing investors and partners with clear, auditable performance data.</div></div>
+          </div>
+          <div class="pillar-item">
+            <div class="pi-dot"></div>
+            <div><div class="pi-title">Anti-Corruption Policy</div><div class="pi-desc">Zero-tolerance policy on bribery and corruption enforced across all group companies, with a confidential whistleblower mechanism.</div></div>
+          </div>
+          <div class="pillar-item">
+            <div class="pi-dot"></div>
+            <div><div class="pi-title">Data Privacy & Security</div><div class="pi-desc">Customer and partner data protected in compliance with India's Digital Personal Data Protection Act, with annual third-party audits.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INITIATIVES -->
+<section class="initiatives-section">
+  <div class="initiatives-inner">
+    <div class="section-header reveal">
+      <div class="section-pill pill-green" style="margin-bottom:18px;">Key Initiatives</div>
+      <h2 class="section-heading">From <span class="green">Commitment</span><br>to <span class="gold">Action</span></h2>
+      <p class="section-sub">Our sustainability commitments are backed by concrete, on-ground programmes underway across all five business verticals today.</p>
+    </div>
+    <div class="init-grid">
+      <div class="init-card ic-green reveal">
+        <div class="init-num">01</div>
+        <div class="init-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+        </div>
+        <div class="init-title">Solar-Powered Warehousing</div>
+        <div class="init-desc">We have installed solar arrays across our flagship 2 lakh sq.ft. warehouse in Bengaluru, generating clean energy to power our forklifts, lighting, and cooling systems. The project reduces grid dependency by 35% and is being expanded to all future facilities.</div>
+        <div class="init-tags">
+          <span class="init-tag">35% Grid Reduction</span>
+          <span class="init-tag">Solar PV Arrays</span>
+          <span class="init-tag">2L sq.ft. Facility</span>
+          <span class="init-tag">Expanding to All Sites</span>
+        </div>
+      </div>
+
+      <div class="init-card ic-teal reveal">
+        <div class="init-num">02</div>
+        <div class="init-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 2C8 7 4 12 4 16a8 8 0 0016 0c0-4-4-9-8-14z"/><path d="M12 22v-8M9 19l3-3 3 3"/></svg>
+        </div>
+        <div class="init-title">50,000 Trees — Greening Karnataka</div>
+        <div class="init-desc">In partnership with local forest departments and NGOs, Goyal Group has planted over 50,000 native trees across Karnataka. We match every major contract signed with a tree-planting pledge, making every deal a contribution to India's green cover.</div>
+        <div class="init-tags">
+          <span class="init-tag">50K+ Trees Planted</span>
+          <span class="init-tag">Native Species</span>
+          <span class="init-tag">Karnataka-Wide</span>
+          <span class="init-tag">NGO Partnership</span>
+        </div>
+      </div>
+
+      <div class="init-card ic-gold reveal">
+        <div class="init-num">03</div>
+        <div class="init-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 9h18M8 2v4M16 2v4"/><path d="M7 14h2M11 14h2M15 14h2"/></svg>
+        </div>
+        <div class="init-title">Green Catalogue — Eco-Certified Products</div>
+        <div class="init-desc">We have curated a dedicated "Green Catalogue" within our construction B2B offering — featuring water-efficient fittings, low-VOC tiles, recycled-content building materials, and energy-saving products from certified manufacturers. Now used by 30+ developer clients.</div>
+        <div class="init-tags">
+          <span class="init-tag">500+ Green SKUs</span>
+          <span class="init-tag">30+ Builder Clients</span>
+          <span class="init-tag">Eco-Certified</span>
+          <span class="init-tag">Low-VOC</span>
+        </div>
+      </div>
+
+      <div class="init-card ic-blue reveal">
+        <div class="init-num">04</div>
+        <div class="init-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M5 17H3a2 2 0 01-2-2V7a2 2 0 012-2h11l4 4v6h-2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M9 17h6"/></svg>
+        </div>
+        <div class="init-title">EV Fleet Transition</div>
+        <div class="init-desc">Goyal Group's logistics and last-mile delivery fleet is being progressively converted to electric vehicles. Phase 1 covers 20% of our Bengaluru delivery fleet with 3-wheelers and light EVs. Phase 2 targets 50% EV adoption by 2027 across all delivery operations.</div>
+        <div class="init-tags">
+          <span class="init-tag">Phase 1: 20% EV</span>
+          <span class="init-tag">2027 Target: 50%</span>
+          <span class="init-tag">3-Wheelers + LCVs</span>
+          <span class="init-tag">Zero Emission Delivery</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2030 TARGETS -->
+<section class="targets-section" id="targets">
+  <div class="targets-bg-grid"></div>
+  <div class="targets-glow"></div>
+  <div class="targets-inner">
+    <div class="targets-header reveal">
+      <div class="section-pill pill-green" style="margin:0 auto 18px;">2030 Roadmap</div>
+      <h2 class="targets-heading">Our <span>Sustainability Targets</span></h2>
+      <p class="targets-sub">Measurable commitments we are publicly accountable to — tracked annually and reported transparently.</p>
+    </div>
+    <div class="targets-grid">
+      <div class="target-row reveal">
+        <div class="target-top">
+          <div class="target-left">
+            <div class="target-icon" style="background:rgba(22,163,74,0.15);border:1px solid rgba(22,163,74,0.25);">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#4ADE80" stroke-width="1.7" stroke-linecap="round"><path d="M10 2C7 6 4 9 4 13a6 6 0 0012 0c0-4-3-7-6-11z"/></svg>
+            </div>
+            <div>
+              <div class="target-title">Carbon Emissions Reduction</div>
+              <div class="target-sub">Scope 1 & 2 emissions across all group operations</div>
+            </div>
+          </div>
+          <div class="target-right">
+            <div class="target-pct">42%</div>
+            <div class="target-year">By 2030</div>
+          </div>
+        </div>
+        <div class="progress-track"><div class="progress-fill pf-green" style="width:0%" data-width="42%"></div></div>
+      </div>
+
+      <div class="target-row reveal">
+        <div class="target-top">
+          <div class="target-left">
+            <div class="target-icon" style="background:rgba(13,148,136,0.15);border:1px solid rgba(13,148,136,0.25);">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#2DD4BF" stroke-width="1.7" stroke-linecap="round"><path d="M10 2C7 7 4 11 4 15a6 6 0 0012 0c0-4-3-8-6-13z"/><path d="M10 18v-6M7 15l3-3 3 3"/></svg>
+            </div>
+            <div>
+              <div class="target-title">Water Consumption Reduction</div>
+              <div class="target-sub">Across warehouses, offices and fleet washing operations</div>
+            </div>
+          </div>
+          <div class="target-right">
+            <div class="target-pct">40%</div>
+            <div class="target-year">By 2030</div>
+          </div>
+        </div>
+        <div class="progress-track"><div class="progress-fill pf-teal" style="width:0%" data-width="28%"></div></div>
+      </div>
+
+      <div class="target-row reveal">
+        <div class="target-top">
+          <div class="target-left">
+            <div class="target-icon" style="background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.25);">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#C9A84C" stroke-width="1.7" stroke-linecap="round"><circle cx="10" cy="10" r="3"/><path d="M10 2v2M10 16v2M4.22 4.22l1.42 1.42M14.36 14.36l1.42 1.42M2 10h2M16 10h2M4.22 15.78l1.42-1.42M14.36 5.64l1.42-1.42"/></svg>
+            </div>
+            <div>
+              <div class="target-title">Renewable Energy in Operations</div>
+              <div class="target-sub">Percentage of total energy from solar and renewable sources</div>
+            </div>
+          </div>
+          <div class="target-right">
+            <div class="target-pct">60%</div>
+            <div class="target-year">By 2030</div>
+          </div>
+        </div>
+        <div class="progress-track"><div class="progress-fill pf-gold" style="width:0%" data-width="30%"></div></div>
+      </div>
+
+      <div class="target-row reveal">
+        <div class="target-top">
+          <div class="target-left">
+            <div class="target-icon" style="background:rgba(37,99,235,0.15);border:1px solid rgba(37,99,235,0.25);">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#60A5FA" stroke-width="1.7" stroke-linecap="round"><path d="M3 17V8l7-5 7 5v9"/><path d="M8 17v-6h4v6"/></svg>
+            </div>
+            <div>
+              <div class="target-title">EV Fleet Adoption</div>
+              <div class="target-sub">Percentage of delivery and logistics fleet on electric vehicles</div>
+            </div>
+          </div>
+          <div class="target-right">
+            <div class="target-pct">50%</div>
+            <div class="target-year">By 2027</div>
+          </div>
+        </div>
+        <div class="progress-track"><div class="progress-fill pf-blue" style="width:0%" data-width="20%"></div></div>
+      </div>
+
+      <div class="target-row reveal">
+        <div class="target-top">
+          <div class="target-left">
+            <div class="target-icon" style="background:rgba(5,150,105,0.15);border:1px solid rgba(5,150,105,0.25);">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#34D399" stroke-width="1.7" stroke-linecap="round"><circle cx="10" cy="7" r="4"/><path d="M2 18c0-4.42 3.58-8 8-8s8 3.58 8 8"/><path d="M13 12l3 3-3 3"/></svg>
+            </div>
+            <div>
+              <div class="target-title">Women in Leadership Roles</div>
+              <div class="target-sub">Female representation in management and senior positions group-wide</div>
+            </div>
+          </div>
+          <div class="target-right">
+            <div class="target-pct">30%</div>
+            <div class="target-year">By 2027</div>
+          </div>
+        </div>
+        <div class="progress-track"><div class="progress-fill pf-emerald" style="width:0%" data-width="18%"></div></div>
+      </div>
+
+      <div class="target-row reveal">
+        <div class="target-top">
+          <div class="target-left">
+            <div class="target-icon" style="background:rgba(22,163,74,0.15);border:1px solid rgba(22,163,74,0.25);">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#4ADE80" stroke-width="1.7" stroke-linecap="round"><path d="M4 15h12M4 11h12M4 7h7"/><path d="M14 3l4 4-4 4"/></svg>
+            </div>
+            <div>
+              <div class="target-title">Supplier Code of Conduct Compliance</div>
+              <div class="target-sub">Percentage of suppliers fully audited and compliant with ethical standards</div>
+            </div>
+          </div>
+          <div class="target-right">
+            <div class="target-pct">100%</div>
+            <div class="target-year">By 2028</div>
+          </div>
+        </div>
+        <div class="progress-track"><div class="progress-fill pf-green" style="width:0%" data-width="55%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMUNITY -->
+<section class="community-section">
+  <div class="community-inner">
+    <div class="section-header reveal">
+      <div class="section-pill pill-gold" style="margin-bottom:18px;">Community Impact</div>
+      <h2 class="section-heading">Rooted in <span class="gold">Communities.</span><br>Growing with <span class="green">India.</span></h2>
+      <p class="section-sub">Beyond our business operations, Goyal Group is committed to the wellbeing of the communities that surround us — investing in education, health, livelihoods, and infrastructure.</p>
+    </div>
+    <div class="community-grid">
+      <div class="community-cards reveal">
+        <div class="community-card">
+          <div class="cc-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M2 17V8l8-5 8 5v9"/><path d="M7 17v-6h6v6"/></svg>
+          </div>
+          <div>
+            <div class="cc-title">Education Scholarships</div>
+            <div class="cc-desc">Annual merit-cum-need scholarships for children of workers in our supply chain — covering school fees, books, and uniforms for underprivileged students.</div>
+            <div class="cc-impact">📚 500+ students supported annually</div>
+          </div>
+        </div>
+        <div class="community-card">
+          <div class="cc-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M10 2C6 7 4 11 4 14a6 6 0 0012 0c0-3-2-7-6-12z"/><path d="M7 13l2 2 4-4"/></svg>
+          </div>
+          <div>
+            <div class="cc-title">Clean Drinking Water</div>
+            <div class="cc-desc">Water purifier installations in 12 villages and urban settlements near our Bengaluru facilities — providing safe drinking water to families who previously relied on contaminated sources.</div>
+            <div class="cc-impact">💧 12 villages · 5,000+ beneficiaries</div>
+          </div>
+        </div>
+        <div class="community-card">
+          <div class="cc-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="10" cy="8" r="4"/><path d="M2 18c0-4.42 3.58-8 8-8s8 3.58 8 8"/></svg>
+          </div>
+          <div>
+            <div class="cc-title">Vocational Skill Training</div>
+            <div class="cc-desc">Partnership with local ITIs to train youth in plumbing, electrical fitting, tile laying, and warehouse operations — creating job-ready workers for the construction sector.</div>
+            <div class="cc-impact">🔧 1,200+ youth trained in 3 years</div>
+          </div>
+        </div>
+        <div class="community-card">
+          <div class="cc-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 9l7-7 7 7v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path d="M7 20V10h6v10"/></svg>
+          </div>
+          <div>
+            <div class="cc-title">Healthcare Access</div>
+            <div class="cc-desc">Mobile health camps organised quarterly near our warehouse and operational hubs — providing free consultations, medicines, and health check-ups to workers and their families.</div>
+            <div class="cc-impact">🏥 4,000+ consultations annually</div>
+          </div>
+        </div>
+      </div>
+      <div class="community-visual reveal">
+        <div class="cv-heading">Community Impact at a Glance</div>
+        <div class="cv-sub">FY2024–25 — Direct & Indirect Beneficiaries</div>
+        <div class="cv-stats">
+          <div class="cv-stat">
+            <div class="cv-stat-num">10<span>K+</span></div>
+            <div class="cv-stat-label">Community Beneficiaries</div>
+          </div>
+          <div class="cv-stat">
+            <div class="cv-stat-num">500<span>+</span></div>
+            <div class="cv-stat-label">Students Supported</div>
+          </div>
+          <div class="cv-stat">
+            <div class="cv-stat-num">12</div>
+            <div class="cv-stat-label">Villages with Clean Water</div>
+          </div>
+          <div class="cv-stat">
+            <div class="cv-stat-num">1.2<span>K</span></div>
+            <div class="cv-stat-label">Youth Trained in Skills</div>
+          </div>
+          <div class="cv-stat">
+            <div class="cv-stat-num">50<span>K+</span></div>
+            <div class="cv-stat-label">Trees Planted</div>
+          </div>
+          <div class="cv-stat">
+            <div class="cv-stat-num">₹2<span>Cr+</span></div>
+            <div class="cv-stat-label">CSR Investment (Annual)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RECOGNITIONS -->
+<section class="awards-section">
+  <div class="awards-inner">
+    <div class="awards-label">Sustainability Recognitions & Alignments</div>
+    <div class="awards-row">
+      <div class="award-card">
+        <div class="award-icon">🌿</div>
+        <div class="award-title">UN Global Compact Signatory</div>
+        <div class="award-year">Committed 2023</div>
+      </div>
+      <div class="award-card">
+        <div class="award-icon">🏆</div>
+        <div class="award-title">Karnataka Green Business Award</div>
+        <div class="award-year">Recognised 2024</div>
+      </div>
+      <div class="award-card">
+        <div class="award-icon">♻️</div>
+        <div class="award-title">Zero Waste Certified Facility</div>
+        <div class="award-year">Bengaluru Warehouse</div>
+      </div>
+      <div class="award-card">
+        <div class="award-icon">☀️</div>
+        <div class="award-title">Solar Champion — MSME Category</div>
+        <div class="award-year">Karnataka Energy Dept, 2024</div>
+      </div>
+      <div class="award-card">
+        <div class="award-icon">🎓</div>
+        <div class="award-title">Best CSR Initiative — Construction Sector</div>
+        <div class="award-year">Bengaluru Chamber 2023</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <div class="section-pill pill-green" style="margin:0 auto 22px;">Join the Journey</div>
+    <h2 class="cta-heading">Build a <span>Sustainable</span><br>Future with Us.</h2>
+    <p class="cta-body">Whether you're a developer seeking eco-certified materials, an investor with an ESG mandate, or a partner who shares our values — Goyal Group welcomes you to be part of a better-built India.</p>
+    <div class="cta-btns">
+      <a href="goyal-group-contact.html" class="btn-green">Get In Touch ↗</a>
+      <a href="goyal-group-businesses.html" class="btn-gold">Our Businesses ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <svg width="30" height="30" viewBox="0 0 44 44" fill="none"><polygon points="22,6 36.5,14 36.5,30 22,38 7.5,30 7.5,14" fill="url(#hgf)"/><defs><linearGradient id="hgf" x1="7.5" y1="6" x2="36.5" y2="38" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#E8C97A"/><stop offset="100%" stop-color="#B8872C"/></linearGradient></defs><text x="22" y="27" text-anchor="middle" font-family="Sora,sans-serif" font-weight="800" font-size="15" fill="#0D1B2A">G</text></svg>
+      <span style="font-family:'Sora',sans-serif;font-weight:700;font-size:0.85rem;color:rgba(255,255,255,0.45);letter-spacing:0.08em;">GOYAL GROUP</span>
+    </div>
+    <p class="footer-copy">© 2025 Goyal Group. All rights reserved. Building Today. Enriching Tomorrow.</p>
+    <div class="footer-links">
+      <a href="goyal-group-homepage.html">Home</a>
+      <a href="goyal-group-about.html">About</a>
+      <a href="invest.html">Investors</a>
+      <a href="goyal-group-contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Stagger card animations
+  document.querySelectorAll('.thesis-grid .thesis-card, .init-grid .init-card, .pillar-card').forEach((el, i) => {
+    el.style.transitionDelay = (i * 0.1) + 's';
+  });
+
+  // Animate progress bars when in view
+  const progressObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.progress-fill').forEach(bar => {
+          const target = bar.getAttribute('data-width');
+          setTimeout(() => { bar.style.width = target; }, 200);
+        });
+        progressObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  const targetsSection = document.getElementById('targets');
+  if (targetsSection) progressObserver.observe(targetsSection);
+</script>
+</body>
+</html>

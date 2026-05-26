@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us — Goyal Group</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-dim: rgba(201,168,76,0.13);
+    --navy: #0D1B2A;
+    --navy-mid: #142233;
+    --white: #FFFFFF;
+    --grey-bg: #F5F6F8;
+    --grey-text: #6B7280;
+    --border: #E4E7EC;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--grey-bg); color: var(--navy); overflow-x: hidden; }
+
+  /* ── NAVBAR ── */
+  .navbar-wrapper { position: fixed; top: 16px; left: 50%; transform: translateX(-50%); width: calc(100% - 48px); max-width: 1240px; z-index: 200; }
+  .navbar { background: var(--white); border-radius: 50px; padding: 12px 22px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 4px 32px rgba(13,27,42,0.12); }
+  .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+  .logo-hex { width: 42px; height: 42px; }
+  .logo-text .goyal { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.1rem; color: var(--navy); letter-spacing: 0.08em; display: block; }
+  .logo-text .group { font-family: 'Sora', sans-serif; font-weight: 600; font-size: 0.58rem; color: var(--gold); letter-spacing: 0.22em; text-transform: uppercase; display: block; margin-top: 1px; }
+  .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+  .nav-links a { font-size: 0.8rem; font-weight: 500; color: #374151; text-decoration: none; padding: 6px 10px; border-radius: 20px; white-space: nowrap; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-links .active { color: var(--navy); font-weight: 700; position: relative; }
+  .nav-links .active::after { content: ''; position: absolute; bottom: 2px; left: 10px; right: 10px; height: 2px; background: var(--gold); border-radius: 2px; }
+  .nav-cta { background: var(--navy); color: var(--white); padding: 10px 20px; border-radius: 50px; font-weight: 700; font-size: 0.8rem; display: flex; align-items: center; gap: 6px; flex-shrink: 0; text-decoration: none; transition: background 0.2s, transform 0.2s; }
+  .nav-cta:hover { background: #1a2f47; transform: translateY(-1px); }
+  @media (max-width: 900px) { .nav-links { display: none; } }
+
+  /* ── PAGE HERO ── */
+  .page-hero {
+    background: var(--navy);
+    padding: 140px 24px 100px;
+    position: relative;
+    overflow: hidden;
+    min-height: 620px;
+    display: flex;
+    align-items: center;
+  }
+  .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; }
+  .hero-glow { position: absolute; top: -200px; right: -100px; width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 65%); pointer-events: none; }
+  .hero-ring { position: absolute; bottom: -140px; left: -80px; width: 460px; height: 460px; border-radius: 50%; border: 70px solid rgba(201,168,76,0.04); pointer-events: none; }
+
+  /* giant background G */
+  .hero-bg-letter {
+    position: absolute;
+    right: -60px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Sora', sans-serif;
+    font-weight: 800;
+    font-size: 40vw;
+    color: rgba(201,168,76,0.03);
+    line-height: 1;
+    user-select: none;
+    pointer-events: none;
+    letter-spacing: -0.05em;
+  }
+
+  .page-hero-inner { max-width: 1240px; margin: 0 auto; position: relative; z-index: 1; display: grid; grid-template-columns: 1.1fr 1fr; gap: 80px; align-items: center; width: 100%; }
+
+  .breadcrumb { display: flex; align-items: center; gap: 8px; margin-bottom: 22px; }
+  .breadcrumb a { font-size: 0.78rem; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
+  .breadcrumb a:hover { color: var(--gold); }
+  .breadcrumb-sep { color: rgba(255,255,255,0.22); }
+  .breadcrumb span { font-size: 0.78rem; color: var(--gold); font-weight: 600; }
+
+  .section-pill { display: inline-flex; align-items: center; gap: 8px; background: var(--gold-dim); border: 1px solid rgba(201,168,76,0.3); border-radius: 50px; padding: 6px 14px; font-size: 0.74rem; font-weight: 600; color: var(--gold); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 20px; }
+  .section-pill::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+
+  .hero-heading { font-family: 'Sora', sans-serif; font-weight: 800; font-size: clamp(2.6rem, 5vw, 4rem); color: var(--white); line-height: 1.07; margin-bottom: 22px; }
+  .hero-heading span { color: var(--gold); }
+  .hero-body { font-size: 1rem; line-height: 1.78; color: rgba(255,255,255,0.6); margin-bottom: 36px; max-width: 500px; }
+  .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-gold { display: inline-flex; align-items: center; gap: 8px; background: var(--gold); color: var(--navy); padding: 13px 26px; border-radius: 50px; font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.88rem; text-decoration: none; transition: background 0.2s, transform 0.2s; }
+  .btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-ghost { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--white); padding: 13px 26px; border-radius: 50px; border: 1.5px solid rgba(255,255,255,0.2); font-family: 'Sora', sans-serif; font-weight: 600; font-size: 0.88rem; text-decoration: none; transition: border-color 0.2s, color 0.2s, transform 0.2s; }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+  /* hero right — vertical stat strip */
+  .hero-stat-strip { display: flex; flex-direction: column; gap: 14px; }
+  .hstat { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 18px; padding: 22px 26px; display: flex; align-items: center; gap: 18px; transition: border-color 0.25s, background 0.25s; }
+  .hstat:hover { border-color: rgba(201,168,76,0.35); background: rgba(201,168,76,0.05); }
+  .hstat-icon { width: 46px; height: 46px; border-radius: 12px; background: var(--gold-dim); border: 1px solid rgba(201,168,76,0.25); display: flex; align-items: center; justify-content: center; color: var(--gold); flex-shrink: 0; }
+  .hstat-num { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.6rem; color: var(--white); line-height: 1; }
+  .hstat-label { font-size: 0.75rem; color: rgba(255,255,255,0.45); margin-top: 4px; }
+
+  @media (max-width: 860px) {
+    .page-hero-inner { grid-template-columns: 1fr; gap: 44px; }
+    .hero-stat-strip { flex-direction: row; flex-wrap: wrap; }
+    .hstat { flex: 1 1 calc(50% - 7px); }
+  }
+
+  /* ── STORY SECTION ── */
+  .story-section { background: var(--white); padding: 100px 24px; }
+  .story-inner { max-width: 1240px; margin: 0 auto; }
+  .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 90px; align-items: start; }
+  @media (max-width: 860px) { .story-grid { grid-template-columns: 1fr; gap: 48px; } }
+
+  .story-left { position: sticky; top: 100px; }
+  .story-eyebrow { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 5rem; color: rgba(13,27,42,0.05); line-height: 1; margin-bottom: -28px; letter-spacing: -0.04em; }
+  .story-heading { font-family: 'Sora', sans-serif; font-weight: 800; font-size: clamp(2rem, 3.5vw, 2.8rem); color: var(--navy); line-height: 1.12; margin-bottom: 20px; }
+  .story-heading span { color: var(--gold); }
+  .story-rule { width: 44px; height: 4px; background: var(--gold); border-radius: 2px; margin-bottom: 22px; }
+  .story-lead { font-size: 1.05rem; line-height: 1.78; color: var(--grey-text); margin-bottom: 28px; }
+  .story-quote { border-left: 3px solid var(--gold); padding: 16px 22px; margin: 28px 0; background: rgba(201,168,76,0.05); border-radius: 0 12px 12px 0; }
+  .story-quote-text { font-family: 'Sora', sans-serif; font-style: italic; font-weight: 600; font-size: 1rem; color: var(--navy); line-height: 1.6; }
+  .story-quote-attr { font-size: 0.78rem; color: var(--gold); font-weight: 700; margin-top: 8px; letter-spacing: 0.04em; }
+
+  .story-right { display: flex; flex-direction: column; gap: 28px; }
+  .story-para-heading { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1rem; color: var(--navy); margin-bottom: 10px; display: flex; align-items: center; gap: 10px; }
+  .story-para-heading::before { content: ''; width: 22px; height: 3px; background: var(--gold); border-radius: 2px; flex-shrink: 0; }
+  .story-para { font-size: 0.95rem; line-height: 1.8; color: var(--grey-text); }
+
+  /* ── TIMELINE ── */
+  .timeline-section { background: var(--navy); padding: 100px 24px; position: relative; overflow: hidden; }
+  .tl-grid-bg { position: absolute; inset: 0; background-image: linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; }
+  .tl-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 800px; height: 400px; background: radial-gradient(ellipse, rgba(201,168,76,0.05) 0%, transparent 70%); pointer-events: none; }
+  .timeline-inner { max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
+  .tl-header { text-align: center; margin-bottom: 70px; }
+  .tl-heading { font-family: 'Sora', sans-serif; font-weight: 800; font-size: clamp(2rem, 3.5vw, 2.8rem); color: var(--white); line-height: 1.1; margin-bottom: 12px; }
+  .tl-heading span { color: var(--gold); }
+  .tl-sub { font-size: 0.95rem; color: rgba(255,255,255,0.5); }
+
+  /* vertical timeline */
+  .tl-line-wrap { position: relative; }
+  .tl-line-wrap::before { content: ''; position: absolute; left: 50%; transform: translateX(-50%); top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, transparent, rgba(201,168,76,0.4) 10%, rgba(201,168,76,0.4) 90%, transparent); }
+
+  .tl-item { display: grid; grid-template-columns: 1fr 60px 1fr; gap: 0; margin-bottom: 52px; align-items: start; }
+  .tl-item:last-child { margin-bottom: 0; }
+  .tl-left { text-align: right; padding-right: 36px; padding-top: 8px; }
+  .tl-right { padding-left: 36px; padding-top: 8px; }
+  .tl-empty { }
+
+  /* alternating: odd items use left side, even use right */
+  .tl-item.left .tl-content { grid-column: 1; text-align: right; }
+  .tl-item.right .tl-content { grid-column: 3; }
+
+  .tl-node { width: 60px; display: flex; flex-direction: column; align-items: center; gap: 6px; position: relative; z-index: 1; }
+  .tl-circle { width: 44px; height: 44px; border-radius: 50%; background: var(--navy); border: 2px solid var(--gold); display: flex; align-items: center; justify-content: center; color: var(--gold); font-family: 'Sora', sans-serif; font-weight: 800; font-size: 0.68rem; flex-shrink: 0; transition: background 0.25s; }
+  .tl-item:hover .tl-circle { background: var(--gold); color: var(--navy); }
+
+  .tl-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 20px 22px; transition: border-color 0.25s, background 0.25s; }
+  .tl-item:hover .tl-card { border-color: rgba(201,168,76,0.35); background: rgba(201,168,76,0.05); }
+  .tl-year { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 0.75rem; color: var(--gold); letter-spacing: 0.1em; margin-bottom: 6px; }
+  .tl-title { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.92rem; color: var(--white); margin-bottom: 6px; }
+  .tl-desc { font-size: 0.8rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
+
+  @media (max-width: 700px) {
+    .tl-line-wrap::before { left: 22px; }
+    .tl-item { grid-template-columns: 44px 1fr; gap: 0; }
+    .tl-item .tl-left { display: none; }
+    .tl-item .tl-empty { display: none; }
+    .tl-item .tl-right { padding-left: 18px; }
+    .tl-node { width: 44px; }
+  }
+
+  /* ── VALUES SECTION ── */
+  .values-section { background: var(--grey-bg); padding: 100px 24px; }
+  .values-inner { max-width: 1240px; margin: 0 auto; }
+  .values-header { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: end; margin-bottom: 60px; }
+  @media (max-width: 760px) { .values-header { grid-template-columns: 1fr; gap: 20px; } }
+  .values-heading { font-family: 'Sora', sans-serif; font-weight: 800; font-size: clamp(2rem, 3.5vw, 2.8rem); color: var(--navy); line-height: 1.1; }
+  .values-heading span { color: var(--gold); }
+  .values-sub { font-size: 0.95rem; color: var(--grey-text); line-height: 1.75; max-width: 420px; }
+
+  .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 860px) { .values-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .values-grid { grid-template-columns: 1fr; } }
+
+  .value-card { background: var(--white); border-radius: 20px; padding: 32px 28px; border: 1.5px solid var(--border); transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s; position: relative; overflow: hidden; }
+  .value-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--gold), var(--gold-light)); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+  .value-card:hover { transform: translateY(-5px); box-shadow: 0 16px 48px rgba(13,27,42,0.1); border-color: rgba(201,168,76,0.3); }
+  .value-card:hover::before { transform: scaleX(1); }
+  .value-number { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 3.5rem; color: rgba(201,168,76,0.1); line-height: 1; margin-bottom: -14px; letter-spacing: -0.04em; }
+  .value-icon { width: 48px; height: 48px; border-radius: 14px; background: var(--gold-dim); border: 1px solid rgba(201,168,76,0.25); display: flex; align-items: center; justify-content: center; color: var(--gold); margin-bottom: 16px; }
+  .value-title { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.05rem; color: var(--navy); margin-bottom: 10px; }
+  .value-desc { font-size: 0.85rem; color: var(--grey-text); line-height: 1.7; }
+
+  /* ── LEADERSHIP SECTION ── */
+  .leadership-section { background: var(--white); padding: 100px 24px; }
+  .leadership-inner { max-width: 1240px; margin: 0 auto; }
+  .section-header { margin-bottom: 60px; }
+  .section-heading { font-family: 'Sora', sans-serif; font-weight: 800; font-size: clamp(2rem, 3.5vw, 2.8rem); color: var(--navy); line-height: 1.1; margin-bottom: 12px; }
+  .section-heading span { color: var(--gold); }
+  .section-sub { font-size: 0.95rem; color: var(--grey-text); line-height: 1.65; max-width: 480px; }
+
+  /* Chairman — full width feature */
+  .leader-feature { display: grid; grid-template-columns: 340px 1fr; gap: 56px; align-items: start; margin-bottom: 48px; background: linear-gradient(135deg, var(--navy) 0%, #1a3050 100%); border-radius: 28px; overflow: hidden; padding: 0; }
+  @media (max-width: 860px) { .leader-feature { grid-template-columns: 1fr; } }
+  .leader-feature-visual { background: linear-gradient(160deg, rgba(201,168,76,0.15) 0%, transparent 60%); min-height: 360px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; padding: 40px; }
+  .leader-feature-visual::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 50%, rgba(201,168,76,0.1) 0%, transparent 65%); }
+  .leader-avatar-large { width: 160px; height: 160px; border-radius: 50%; background: rgba(201,168,76,0.15); border: 3px solid rgba(201,168,76,0.45); display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; }
+  .leader-avatar-large::before { content: ''; position: absolute; inset: -8px; border-radius: 50%; border: 1px solid rgba(201,168,76,0.2); }
+  .leader-initials-large { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 3rem; color: var(--gold); }
+  .leader-feature-body { padding: 44px 44px 44px 0; }
+  @media (max-width: 860px) { .leader-feature-body { padding: 32px; } }
+  .leader-tag { display: inline-flex; align-items: center; gap: 7px; background: var(--gold-dim); border: 1px solid rgba(201,168,76,0.3); border-radius: 50px; padding: 5px 12px; font-size: 0.7rem; font-weight: 700; color: var(--gold); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 14px; }
+  .leader-name-large { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.9rem; color: var(--white); line-height: 1.1; margin-bottom: 6px; }
+  .leader-role-large { font-size: 0.85rem; color: rgba(255,255,255,0.5); font-weight: 500; margin-bottom: 22px; }
+  .leader-bio { font-size: 0.92rem; line-height: 1.8; color: rgba(255,255,255,0.65); margin-bottom: 28px; }
+  .leader-highlights { display: flex; gap: 24px; flex-wrap: wrap; margin-bottom: 28px; }
+  .leader-highlight { }
+  .lh-num { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.5rem; color: var(--white); line-height: 1; }
+  .lh-label { font-size: 0.72rem; color: rgba(255,255,255,0.4); margin-top: 4px; }
+  .leader-contacts { display: flex; gap: 10px; flex-wrap: wrap; }
+  .lc-btn { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 50px; padding: 8px 16px; font-size: 0.78rem; font-weight: 600; color: rgba(255,255,255,0.8); text-decoration: none; transition: all 0.2s; }
+  .lc-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.08); }
+
+  /* Partner card */
+  .leader-cards-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  @media (max-width: 700px) { .leader-cards-row { grid-template-columns: 1fr; } }
+  .leader-card { background: var(--grey-bg); border: 1.5px solid var(--border); border-radius: 20px; overflow: hidden; transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s; }
+  .leader-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(13,27,42,0.1); border-color: rgba(201,168,76,0.3); }
+  .leader-card-top { background: linear-gradient(135deg, var(--navy) 0%, #1a3050 100%); height: 140px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+  .leader-card-top::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 60% 30%, rgba(201,168,76,0.14) 0%, transparent 65%); }
+  .leader-avatar { width: 80px; height: 80px; border-radius: 50%; background: rgba(201,168,76,0.15); border: 2.5px solid rgba(201,168,76,0.45); display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; }
+  .leader-initials { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.6rem; color: var(--gold); }
+  .leader-card-body { padding: 22px; }
+  .leader-card-name { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1.05rem; color: var(--navy); margin-bottom: 3px; }
+  .leader-card-role { font-size: 0.72rem; color: var(--gold); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+  .leader-card-role::before { content: ''; width: 14px; height: 2px; background: var(--gold); border-radius: 1px; }
+  .leader-card-desc { font-size: 0.83rem; color: var(--grey-text); line-height: 1.65; margin-bottom: 16px; }
+  .leader-card-contacts { display: flex; gap: 8px; }
+  .lcc { display: inline-flex; align-items: center; gap: 5px; font-size: 0.73rem; font-weight: 600; color: var(--navy); background: var(--white); border: 1px solid var(--border); border-radius: 50px; padding: 5px 11px; text-decoration: none; transition: all 0.2s; }
+  .lcc:hover { background: var(--gold-dim); border-color: rgba(201,168,76,0.4); color: var(--gold); }
+
+  /* ── WHY GOYAL SECTION ── */
+  .why-section { background: var(--navy); padding: 100px 24px; position: relative; overflow: hidden; }
+  .why-glow { position: absolute; bottom: -150px; right: -100px; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 65%); pointer-events: none; }
+  .why-inner { max-width: 1240px; margin: 0 auto; position: relative; z-index: 1; }
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  @media (max-width: 860px) { .why-grid { grid-template-columns: 1fr; gap: 48px; } }
+  .why-heading { font-family: 'Sora', sans-serif; font-weight: 800; font-size: clamp(2rem, 3.5vw, 2.8rem); color: var(--white); line-height: 1.1; margin-bottom: 20px; }
+  .why-heading span { color: var(--gold); }
+  .why-body { font-size: 0.95rem; color: rgba(255,255,255,0.58); line-height: 1.78; margin-bottom: 36px; }
+  .why-cta { display: inline-flex; align-items: center; gap: 8px; background: var(--gold); color: var(--navy); padding: 13px 28px; border-radius: 50px; font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.88rem; text-decoration: none; transition: background 0.2s, transform 0.2s; }
+  .why-cta:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .why-points { display: flex; flex-direction: column; gap: 16px; }
+  .why-point { display: flex; align-items: flex-start; gap: 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 20px 22px; transition: border-color 0.25s, background 0.25s; }
+  .why-point:hover { border-color: rgba(201,168,76,0.35); background: rgba(201,168,76,0.05); }
+  .why-point-icon { width: 42px; height: 42px; border-radius: 11px; background: var(--gold-dim); border: 1px solid rgba(201,168,76,0.25); display: flex; align-items: center; justify-content: center; color: var(--gold); flex-shrink: 0; margin-top: 2px; }
+  .why-point-title { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.9rem; color: var(--white); margin-bottom: 4px; }
+  .why-point-desc { font-size: 0.8rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
+
+  /* ── PARTNERS STRIP ── */
+  .partners-section { background: var(--white); padding: 60px 24px; border-top: 1px solid var(--border); }
+  .partners-inner { max-width: 1240px; margin: 0 auto; }
+  .partners-label { text-align: center; font-size: 0.78rem; font-weight: 600; color: var(--grey-text); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 32px; }
+  .partners-row { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
+  .partner-chip { display: flex; align-items: center; gap: 10px; padding: 12px 22px; border-radius: 50px; border: 1.5px solid var(--border); background: var(--grey-bg); transition: border-color 0.2s, transform 0.2s; }
+  .partner-chip:hover { border-color: var(--gold); transform: translateY(-2px); }
+  .partner-chip-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); }
+  .partner-chip-name { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.85rem; color: var(--navy); }
+
+  /* ── CTA BANNER ── */
+  .cta-section { background: var(--grey-bg); padding: 80px 24px; }
+  .cta-inner { max-width: 860px; margin: 0 auto; background: linear-gradient(135deg, var(--navy) 0%, #1a3050 100%); border-radius: 28px; padding: 64px 60px; text-align: center; position: relative; overflow: hidden; }
+  .cta-inner::before { content: ''; position: absolute; top: -80px; right: -80px; width: 300px; height: 300px; border-radius: 50%; border: 60px solid rgba(201,168,76,0.07); }
+  .cta-inner::after { content: ''; position: absolute; bottom: -60px; left: -60px; width: 240px; height: 240px; border-radius: 50%; border: 50px solid rgba(201,168,76,0.05); }
+  .cta-heading { font-family: 'Sora', sans-serif; font-weight: 800; font-size: clamp(1.8rem, 3.5vw, 2.6rem); color: var(--white); line-height: 1.1; margin-bottom: 14px; position: relative; z-index: 1; }
+  .cta-heading span { color: var(--gold); }
+  .cta-body { font-size: 0.95rem; color: rgba(255,255,255,0.58); line-height: 1.72; margin-bottom: 32px; position: relative; z-index: 1; }
+  .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
+  @media (max-width: 600px) { .cta-inner { padding: 44px 28px; } }
+
+  /* ── FOOTER ── */
+  .footer { background: #060d15; padding: 36px 24px 24px; }
+  .footer-inner { max-width: 1240px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; }
+  .footer-copy { font-size: 0.77rem; color: rgba(255,255,255,0.3); }
+  .footer-links { display: flex; gap: 22px; }
+  .footer-links a { font-size: 0.77rem; color: rgba(255,255,255,0.38); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--gold); }
+
+  /* ── FADE IN ── */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar-wrapper">
+  <nav class="navbar">
+    <a href="goyal-group-homepage.html" class="logo">
+      <svg class="logo-hex" viewBox="0 0 44 44" fill="none">
+        <polygon points="22,6 36.5,14 36.5,30 22,38 7.5,30 7.5,14" fill="url(#hg)"/>
+        <defs><linearGradient id="hg" x1="7.5" y1="6" x2="36.5" y2="38" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#E8C97A"/><stop offset="100%" stop-color="#B8872C"/></linearGradient></defs>
+        <text x="22" y="27" text-anchor="middle" font-family="Sora,sans-serif" font-weight="800" font-size="15" fill="#0D1B2A">G</text>
+      </svg>
+      <div class="logo-text"><span class="goyal">GOYAL</span><span class="group">GROUP</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html" class="active">About Us</a></li>
+      <li><a href="business.html">Our Businesses</a></li>
+      <li><a href="sustainabality.html">Sustainability</a></li>
+      <li><a href="#">Investors</a></li>
+      <li><a href="#">Careers</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+    <a href="contact.html" class="nav-cta">Get In Touch ↗</a>
+  </nav>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-ring"></div>
+  <div class="hero-bg-letter">G</div>
+  <div class="page-hero-inner">
+    <div>
+      <div class="breadcrumb">
+        <a href="goyal-group-homepage.html">Home</a>
+        <span class="breadcrumb-sep">›</span>
+        <span>About Us</span>
+      </div>
+      <div class="section-pill">About Goyal Group</div>
+      <h1 class="hero-heading">A Legacy <span>Forged in</span><br>Values & Vision.</h1>
+      <p class="hero-body">For over seven decades, Goyal Group has been synonymous with integrity, quality, and the relentless pursuit of excellence. From our roots in construction materials to a diversified conglomerate, ours is a story of family, purpose, and nation-building.</p>
+      <div class="hero-btns">
+        <a href="#story" class="btn-gold">Our Story ↓</a>
+        <a href="goyal-group-contact.html" class="btn-ghost">Partner With Us ↗</a>
+      </div>
+    </div>
+    <div class="hero-stat-strip">
+      <div class="hstat">
+        <div class="hstat-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="3" y="4" width="16" height="15" rx="2"/><path d="M7 2v4M15 2v4M3 10h16"/><rect x="7" y="13" width="3" height="3" rx="0.5"/></svg>
+        </div>
+        <div>
+          <div class="hstat-num">75+</div>
+          <div class="hstat-label">Years of Legacy</div>
+        </div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="2" y="7" width="6" height="13" rx="1.5"/><rect x="9" y="3" width="6" height="17" rx="1.5"/><rect x="16" y="10" width="6" height="10" rx="1.5"/></svg>
+        </div>
+        <div>
+          <div class="hstat-num">₹750Cr+</div>
+          <div class="hstat-label">Group Turnover</div>
+        </div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="8" cy="7" r="3.5"/><circle cx="15" cy="7" r="3.5"/><path d="M1 19c0-3.87 3.13-7 7-7M14 13c3.87 0 7 3.13 7 7"/></svg>
+        </div>
+        <div>
+          <div class="hstat-num">25,000+</div>
+          <div class="hstat-label">People Strong</div>
+        </div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M11 2C7.13 2 4 5.13 4 9c0 5.63 7 11 7 11s7-5.37 7-11c0-3.87-3.13-7-7-7z"/><circle cx="11" cy="9" r="2.5"/></svg>
+        </div>
+        <div>
+          <div class="hstat-num">200+</div>
+          <div class="hstat-label">Locations Pan-India</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORY SECTION -->
+<section class="story-section" id="story">
+  <div class="story-inner">
+    <div class="story-grid">
+      <div class="story-left reveal">
+        <div class="story-eyebrow">OUR<br>STORY</div>
+        <h2 class="story-heading">Built on a<br><span>Foundation</span><br>of Purpose</h2>
+        <div class="story-rule"></div>
+        <p class="story-lead">The Goyal Group was not built overnight. It was built conversation by conversation, delivery by delivery, trust by trust — over decades of unwavering commitment to the builders who raise India's skylines.</p>
+        <div class="story-quote">
+          <div class="story-quote-text">"Quality is not what we offer. It is who we are. Every brick, every pipe, every tile that leaves our warehouse carries our family name — and that means everything."</div>
+          <div class="story-quote-attr">— Rajendra Prasad Goyal, Chairman & MD</div>
+        </div>
+      </div>
+      <div class="story-right reveal">
+        <div>
+          <div class="story-para-heading">The Beginning</div>
+          <p class="story-para">Rajendra Prasad Goyal founded the group with a simple but powerful belief: that India's builders deserved a supply partner they could count on unconditionally. Starting with construction materials in Bengaluru, he built deep relationships with contractors, architects and developers at a time when reliable supply chains were hard to come by.</p>
+        </div>
+        <div>
+          <div class="story-para-heading">Growing the Foundation</div>
+          <p class="story-para">Through the 1990s and 2000s, as Bengaluru transformed into a technology and real estate powerhouse, Goyal Group grew with it. The group became the preferred B2B supplier for India's most respected developers — Prestige Group, Brigade Group, Sobha Developers — earning a reputation for on-time delivery, product quality, and exceptional service that no competitor could match.</p>
+        </div>
+        <div>
+          <div class="story-para-heading">A New Generation of Growth</div>
+          <p class="story-para">The arrival of Vikas Goyal as Partner and Chief Orchestrator brought fresh energy and bold diversification. Under his leadership, the group expanded into automotive distribution, e-commerce, real estate development, and warehousing — while the core construction B2B business continued to scale. Today, Goyal Group is a ₹750+ crore conglomerate spanning five high-growth verticals, 200+ locations across India, and over 25,000 people.</p>
+        </div>
+        <div>
+          <div class="story-para-heading">Where We're Headed</div>
+          <p class="story-para">The Goyal Group is not resting. With infrastructure investment in India at an all-time high and digital commerce reshaping supply chains, we are positioned at the intersection of every major growth trend. Our vision: to be the most trusted diversified business group in India — across industries, across geographies, and across generations.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline-section">
+  <div class="tl-grid-bg"></div>
+  <div class="tl-glow"></div>
+  <div class="timeline-inner">
+    <div class="tl-header reveal">
+      <div class="section-pill" style="margin:0 auto 18px;">Our Journey</div>
+      <h2 class="tl-heading">Seven Decades of <span>Milestones</span></h2>
+      <p class="tl-sub">From a single trading operation to a diversified national conglomerate.</p>
+    </div>
+    <div class="tl-line-wrap">
+
+      <div class="tl-item reveal">
+        <div class="tl-left">
+          <div class="tl-card" style="text-align:right;">
+            <div class="tl-year">1950s</div>
+            <div class="tl-title">The Foundation is Laid</div>
+            <div class="tl-desc">R.P. Goyal establishes the first trading operation in Bengaluru, supplying construction materials to the city's early builders with a focus on quality and reliability.</div>
+          </div>
+        </div>
+        <div class="tl-node">
+          <div class="tl-circle">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2 7l3 3 7-7"/></svg>
+          </div>
+        </div>
+        <div class="tl-empty"></div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-empty"></div>
+        <div class="tl-node">
+          <div class="tl-circle">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="2" width="10" height="10" rx="2"/></svg>
+          </div>
+        </div>
+        <div class="tl-right">
+          <div class="tl-card">
+            <div class="tl-year">1970s–1980s</div>
+            <div class="tl-title">Expansion Across Product Lines</div>
+            <div class="tl-desc">Growth into tiles, bathroom fittings, pipes and sanitary ware. Partnerships formed with leading manufacturers like UltraTech, Jaquar, and Astral.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-left">
+          <div class="tl-card" style="text-align:right;">
+            <div class="tl-year">1990s</div>
+            <div class="tl-title">Prestige & Brigade Partnerships</div>
+            <div class="tl-desc">Goyal Group becomes the preferred supply partner for Prestige Group and Brigade Group — India's premier real estate developers — cementing its position as the #1 B2B construction supplier in Karnataka.</div>
+          </div>
+        </div>
+        <div class="tl-node">
+          <div class="tl-circle">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M7 2l1.5 4.5H13l-3.8 2.7 1.5 4.5L7 11 3.3 13.7 4.8 9.2 1 6.5h4.5z"/></svg>
+          </div>
+        </div>
+        <div class="tl-empty"></div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-empty"></div>
+        <div class="tl-node">
+          <div class="tl-circle">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="7" cy="7" r="5"/><path d="M7 4v3l2 2"/></svg>
+          </div>
+        </div>
+        <div class="tl-right">
+          <div class="tl-card">
+            <div class="tl-year">2000s</div>
+            <div class="tl-title">Bengaluru's Building Boom</div>
+            <div class="tl-desc">As Bengaluru becomes India's tech capital, demand for construction materials surges. Goyal Group scales operations, expands warehouse infrastructure, and deepens its builder network.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-left">
+          <div class="tl-card" style="text-align:right;">
+            <div class="tl-year">2010s</div>
+            <div class="tl-title">Next-Gen Leadership Joins</div>
+            <div class="tl-desc">Vikas Goyal joins as Partner & Chief Orchestrator, bringing entrepreneurial energy and a digital-first vision. The group begins diversifying beyond construction materials.</div>
+          </div>
+        </div>
+        <div class="tl-node">
+          <div class="tl-circle">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M7 1v6m0 0l-3-3m3 3l3-3"/><path d="M2 10h10l-1 3H3z"/></svg>
+          </div>
+        </div>
+        <div class="tl-empty"></div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-empty"></div>
+        <div class="tl-node">
+          <div class="tl-circle">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2 10 L5 7 L7 9 L11 4"/></svg>
+          </div>
+        </div>
+        <div class="tl-right">
+          <div class="tl-card">
+            <div class="tl-year">2020s</div>
+            <div class="tl-title">₹750 Cr+ Diversified Conglomerate</div>
+            <div class="tl-desc">Automotive distribution, e-commerce, real estate and warehousing verticals launch and scale. Group turnover crosses ₹750 crore across 5 sectors, 200+ locations, and 25,000+ people.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-left">
+          <div class="tl-card" style="text-align:right;border-color:rgba(201,168,76,0.4);background:rgba(201,168,76,0.05);">
+            <div class="tl-year">TODAY & BEYOND</div>
+            <div class="tl-title">Building the Future of India</div>
+            <div class="tl-desc">With infrastructure at record highs and digital commerce reshaping supply chains, Goyal Group is positioned for its next phase of growth — Pan-India expansion, tech-driven logistics, and new sector partnerships.</div>
+          </div>
+        </div>
+        <div class="tl-node">
+          <div class="tl-circle" style="background:var(--gold);color:var(--navy);">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 2v10M2 7h10"/></svg>
+          </div>
+        </div>
+        <div class="tl-empty"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="values-section">
+  <div class="values-inner">
+    <div class="values-header reveal">
+      <div>
+        <div class="section-pill">Our Values</div>
+        <h2 class="values-heading">The Principles that<br><span>Guide Everything</span></h2>
+      </div>
+      <p class="values-sub">These are not words on a wall. They are the operating principles that every team member, every partner, and every supplier experiences in every interaction with Goyal Group.</p>
+    </div>
+    <div class="values-grid">
+      <div class="value-card reveal">
+        <div class="value-number">01</div>
+        <div class="value-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M11 2l2.5 7.5H21l-6.5 4.5 2.5 7.5L11 17l-6 4.5 2.5-7.5L1 9.5h7.5z"/></svg>
+        </div>
+        <div class="value-title">Uncompromising Quality</div>
+        <div class="value-desc">Every product we stock, every delivery we make, and every service we provide is held to the highest standard. Our name is on every transaction — and that is a promise we never break.</div>
+      </div>
+      <div class="value-card reveal">
+        <div class="value-number">02</div>
+        <div class="value-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M11 3v10M11 3L7 7M11 3l4 4"/><circle cx="11" cy="17" r="2"/></svg>
+        </div>
+        <div class="value-title">Integrity in All Things</div>
+        <div class="value-desc">We say what we mean and deliver what we promise. Transparent pricing, honest communication, and ethical business practices are non-negotiable at every level of our organisation.</div>
+      </div>
+      <div class="value-card reveal">
+        <div class="value-number">03</div>
+        <div class="value-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="M11 7v4l3 2"/></svg>
+        </div>
+        <div class="value-title">Reliability & Timeliness</div>
+        <div class="value-desc">Construction projects cannot wait. Our deep inventory, robust logistics, and dedicated account teams ensure that materials arrive when they are needed — every time, without exception.</div>
+      </div>
+      <div class="value-card reveal">
+        <div class="value-number">04</div>
+        <div class="value-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M2 11h18M11 2l9 9-9 9"/></svg>
+        </div>
+        <div class="value-title">Entrepreneurial Boldness</div>
+        <div class="value-desc">We never stop exploring. From construction materials to automotive, e-commerce to real estate — we pursue new opportunities with discipline, research, and the same commitment to excellence that built our core business.</div>
+      </div>
+      <div class="value-card reveal">
+        <div class="value-number">05</div>
+        <div class="value-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 17V8l8-5 8 5v9"/><path d="M8 22v-8h6v8"/></svg>
+        </div>
+        <div class="value-title">Long-Term Partnerships</div>
+        <div class="value-desc">Our longest client relationships span decades. We believe that the best business is built not on transactions, but on trust — and that the most valuable partnerships are ones that grow and evolve together over time.</div>
+      </div>
+      <div class="value-card reveal">
+        <div class="value-number">06</div>
+        <div class="value-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="8" r="4"/><path d="M3 19c0-4.42 3.58-8 8-8s8 3.58 8 8"/><path d="M15 13l3 3-3 3"/></svg>
+        </div>
+        <div class="value-title">People-First Culture</div>
+        <div class="value-desc">Our 25,000+ team members are our greatest asset. We invest in their growth, celebrate their contributions, and foster a culture where excellence is rewarded and every individual is valued for their unique role in our success.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEADERSHIP -->
+<section class="leadership-section">
+  <div class="leadership-inner">
+    <div class="section-header reveal">
+      <div class="section-pill">Leadership</div>
+      <h2 class="section-heading">The People Who Built<br><span>Goyal Group</span></h2>
+      <p class="section-sub">Two generations of visionary leadership, united by one mission — to build the most trusted diversified business group in India.</p>
+    </div>
+
+    <!-- Chairman Feature -->
+    <div class="leader-feature reveal">
+      <div class="leader-feature-visual">
+        <!-- Decorative SVG portrait placeholder -->
+        <div style="position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:16px;">
+          <div class="leader-avatar-large">
+            <span class="leader-initials-large">RPG</span>
+          </div>
+          <!-- decorative gold rings -->
+          <svg width="200" height="20" viewBox="0 0 200 20" fill="none" style="position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);opacity:0.3">
+            <ellipse cx="100" cy="10" rx="90" ry="6" stroke="#C9A84C" stroke-width="1"/>
+            <ellipse cx="100" cy="10" rx="70" ry="4" stroke="#C9A84C" stroke-width="0.8"/>
+          </svg>
+        </div>
+      </div>
+      <div class="leader-feature-body">
+        <div class="leader-tag">Founder</div>
+        <div class="leader-name-large">Rajendra Prasad Goyal</div>
+        <div class="leader-role-large">Chairman & Managing Director</div>
+        <p class="leader-bio">Mr. Rajendra Prasad Goyal is the visionary founder and driving force behind the Goyal Group. With decades of experience in business and entrepreneurship, he has built the group from a single construction materials trading operation into a ₹750+ crore diversified conglomerate. His deep commitment to quality, reliability, and long-term relationships has earned the trust of India's most respected developers — including Prestige Group and Brigade Group — making Goyal Group their preferred supply partner for construction materials including cement, bathroom fittings, tiles, pipes, and much more.</p>
+        <div class="leader-highlights">
+          <div class="leader-highlight"><div class="lh-num">75+</div><div class="lh-label">Years in Business</div></div>
+          <div class="leader-highlight"><div class="lh-num">50+</div><div class="lh-label">Major Builder Clients</div></div>
+          <div class="leader-highlight"><div class="lh-num">₹500Cr+</div><div class="lh-label">Construction Vertical</div></div>
+        </div>
+        <div class="leader-contacts">
+          <a href="tel:+919845011981" class="lc-btn">📞 +91 98450 11981</a>
+          <a href="mailto:rpgoyals@yahoo.com" class="lc-btn">✉ rpgoyals@yahoo.com</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Two-column cards -->
+    <div class="leader-cards-row">
+      <div class="leader-card reveal">
+        <div class="leader-card-top">
+          <div class="leader-avatar"><span class="leader-initials">VG</span></div>
+        </div>
+        <div class="leader-card-body">
+          <div class="leader-card-name">Vikas Goyal</div>
+          <div class="leader-card-role">Partner & Chief Orchestrator</div>
+          <p class="leader-card-desc">Vikas brings the entrepreneurial vision and strategic acumen that is propelling Goyal Group into its next growth phase. He orchestrates the group's diversification into automotive distribution, e-commerce, real estate, and warehousing — while streamlining operations and integrating technology across all five verticals. His leadership ensures that Goyal Group remains agile, innovative, and deeply connected to the opportunities shaping modern India.</p>
+          <div class="leader-card-contacts">
+            <a href="tel:+919845743808" class="lcc">📞 +91 98457 43808</a>
+            <a href="mailto:vikas@thegoyalgroup.com" class="lcc">✉ Email</a>
+          </div>
+        </div>
+      </div>
+      <div class="leader-card reveal">
+        <div class="leader-card-top">
+          <div class="leader-avatar"><span class="leader-initials">GG</span></div>
+        </div>
+        <div class="leader-card-body">
+          <div class="leader-card-name">Gopal Gupta</div>
+          <div class="leader-card-role">Manager — Operations</div>
+          <p class="leader-card-desc">Gopal Gupta is the operational backbone of Goyal Group, ensuring seamless coordination across supply chains, client accounts, and day-to-day business functions. His deep understanding of the construction materials business and his meticulous attention to execution make him an indispensable part of the leadership team. Clients and partners consistently cite Gopal's responsiveness as one of the key reasons they choose Goyal Group.</p>
+          <div class="leader-card-contacts">
+            <a href="tel:+919066048777" class="lcc">📞 +91 90660 48777</a>
+            <a href="mailto:gopalrgupta@gmail.com" class="lcc">✉ Email</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY GOYAL -->
+<section class="why-section">
+  <div class="why-glow"></div>
+  <div class="why-inner">
+    <div class="why-grid">
+      <div class="reveal">
+        <div class="section-pill">Why Goyal Group</div>
+        <h2 class="why-heading">Why India's Best<br><span>Builders Choose Us</span></h2>
+        <p class="why-body">In an industry built on relationships, Goyal Group has spent over seven decades earning and keeping the trust of every client. Here's what makes the difference.</p>
+        <a href="goyal-group-contact.html" class="why-cta">Start a Conversation ↗</a>
+      </div>
+      <div class="why-points reveal">
+        <div class="why-point">
+          <div class="why-point-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M10 2l2 6h6l-5 3.5 2 6L10 14l-5 3.5 2-6L2 8h6z"/></svg>
+          </div>
+          <div>
+            <div class="why-point-title">Single-Source Supply Partner</div>
+            <div class="why-point-desc">500+ SKUs across cement, tiles, fittings, pipes, steel and more — one trusted partner for everything your project needs.</div>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="why-point-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="10" cy="10" r="8"/><path d="M10 6v4l3 2"/></svg>
+          </div>
+          <div>
+            <div class="why-point-title">Unmatched Delivery Reliability</div>
+            <div class="why-point-desc">Our 2 lakh sq.ft. warehouse and dedicated fleet ensures materials are on-site when you need them — not when it's convenient for us.</div>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="why-point-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 17V8l7-5 7 5v9"/><path d="M8 17v-6h4v6"/></svg>
+          </div>
+          <div>
+            <div class="why-point-title">Deep Industry Knowledge</div>
+            <div class="why-point-desc">70+ years in construction materials means we understand your project requirements, timelines, and specifications better than anyone.</div>
+          </div>
+        </div>
+        <div class="why-point">
+          <div class="why-point-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M2 17l4-8 4 4 4-6 4 10"/></svg>
+          </div>
+          <div>
+            <div class="why-point-title">Competitive Pricing at Scale</div>
+            <div class="why-point-desc">Our volume purchasing power and direct manufacturer relationships mean you get the best prices in the market — consistently, not just at the start of a relationship.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS STRIP -->
+<section class="partners-section">
+  <div class="partners-inner">
+    <div class="partners-label">Trusted by India's Leading Developers</div>
+    <div class="partners-row">
+      <div class="partner-chip"><span class="partner-chip-dot"></span><span class="partner-chip-name">Prestige Group</span></div>
+      <div class="partner-chip"><span class="partner-chip-dot"></span><span class="partner-chip-name">Brigade Group</span></div>
+      <div class="partner-chip"><span class="partner-chip-dot"></span><span class="partner-chip-name">Sobha Developers</span></div>
+      <div class="partner-chip"><span class="partner-chip-dot"></span><span class="partner-chip-name">Godrej Properties</span></div>
+      <div class="partner-chip"><span class="partner-chip-dot"></span><span class="partner-chip-name">Manyata Developers</span></div>
+      <div class="partner-chip"><span class="partner-chip-dot"></span><span class="partner-chip-name">UltraTech</span></div>
+      <div class="partner-chip"><span class="partner-chip-dot"></span><span class="partner-chip-name">Jaquar</span></div>
+      <div class="partner-chip"><span class="partner-chip-dot"></span><span class="partner-chip-name">Astral Pipes</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <div class="section-pill" style="margin:0 auto 20px;">Ready to Partner?</div>
+    <h2 class="cta-heading">Let's Write the<br><span>Next Chapter Together</span></h2>
+    <p class="cta-body">Whether you're a developer, investor, distributor, or simply want to learn more about Goyal Group — we're always happy to start a conversation.</p>
+    <div class="cta-btns">
+      <a href="goyal-group-contact.html" class="btn-gold">Contact Us ↗</a>
+      <a href="goyal-group-businesses.html" class="btn-ghost">Explore Businesses ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <svg width="30" height="30" viewBox="0 0 44 44" fill="none"><polygon points="22,6 36.5,14 36.5,30 22,38 7.5,30 7.5,14" fill="url(#hgf)"/><defs><linearGradient id="hgf" x1="7.5" y1="6" x2="36.5" y2="38" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#E8C97A"/><stop offset="100%" stop-color="#B8872C"/></linearGradient></defs><text x="22" y="27" text-anchor="middle" font-family="Sora,sans-serif" font-weight="800" font-size="15" fill="#0D1B2A">G</text></svg>
+      <span style="font-family:'Sora',sans-serif;font-weight:700;font-size:0.85rem;color:rgba(255,255,255,0.45);letter-spacing:0.08em;">GOYAL GROUP</span>
+    </div>
+    <p class="footer-copy">© 2025 Goyal Group. All rights reserved. Building Today. Enriching Tomorrow.</p>
+    <div class="footer-links">
+      <a href="goyal-group-homepage.html">← Home</a>
+      <a href="goyal-group-businesses.html">Businesses</a>
+      <a href="goyal-group-contact.html">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), 80);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    observer.observe(el);
+  });
+
+  // Stagger children of grids
+  document.querySelectorAll('.values-grid .value-card, .why-points .why-point').forEach((el, i) => {
+    el.style.transitionDelay = (i * 0.1) + 's';
+  });
+</script>
+</body>
+</html>
